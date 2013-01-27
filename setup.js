@@ -133,7 +133,7 @@ var iArrayPosition   = 0;
 
 
 
-var soundLevel1 = new buzz.sound("./sounds/BEATI01.wav");
+var soundLevel1 = new buzz.sound("./sounds/BEATI011.wav");
 var soundLevel12 = new buzz.sound("./sounds/BEATI01.wav");
 
 
