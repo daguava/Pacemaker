@@ -4,7 +4,6 @@ function Item(x, y) {
 	this.x = x;
 	this.y = y;
 	this.image = new Image();
-	this.image.src = "./Images/redbloodcell.gif";
 	this.width = blocksize;
 	this.height = blocksize;
 	this.hidden = false;
@@ -14,7 +13,6 @@ function PunchWall(x, y) {
 	this.x = x;
 	this.y = y;
 	this.image = new Image();
-	this.image.src = "./Images/redbloodcell.gif";
 	this.width = blocksize;
 	this.height = blocksize;
 	this.hidden = false;

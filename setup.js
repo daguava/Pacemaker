@@ -118,50 +118,10 @@ var iCounterMin      = 33;
 var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
-var snd = new buzz.sound("./sounds/BEATA01");
 
+var mySound = new buzz.sound("./sounds/BEATA01.wav");
+mySound.load();
 
-
-
-
-
-
-/*///////////////////////////////JESSES AUDIO BELOW THIS LINE
-
-//audio stuff
-var channelmax = 10;
-audiochannels = new Array();
-for (a=0; a<channelmax; a++){
-	audiochannels[a] = new Array();
-	audiochannels[a]['channel'] = new Audio();
-	audiochannels[a]['finished'] = -1;
-}
-
-function playmultiplesound(s){
-	for (a=0; a<audiochannels.length; a++){
-		thistime = new Date();
-		//IF this channel is finished
-		if(audiochannels[a]['finished'] < this.getTime()){
-			audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
-	        audiochannels[a]['channel'].src = document.getElementById(s).src;
-	        audiochannels[a]['channel'].load();
-	        audiochannels[a]['channel'].play();
-	        break;
-		}
-	}
-}
-
-function playsinglesound(){
-	var soundfile = "";
-	soundfile.src = "./sounds/BREAK01.wav";
-	soundfile.play();
-	
-}
-
-
-playsinglesound();
-
-*/
 
 
 
@@ -220,37 +180,12 @@ background2.src = 			"./Images/test_background2.png";
 }())
 
 	////////////////////////////////////////////////////////////////////////////////////////// SETTING THINGS UP INITIALLY
-<<<<<<< HEAD
 function begin_game(level) {
-=======
-function begin_game() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	Controller = new Control();
-
-
-
-
-
->>>>>>> wut
 
 
 Controller = new Control();
 
-map = maps[level]
+//map = maps[level]
 
 gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
     // a new gamepad connected
