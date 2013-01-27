@@ -63,12 +63,15 @@ var optionsScreen = new Image();
 var gamepad = new Gamepad();
 
 var levelSelectBgImg = new Image();
+var levelCompleteImg = new Image();
+
 var creditScreen1      = new Image();
 var creditNameAlex     = new Image();
 var creditNameNick     = new Image();
 var creditNameMitchell = new Image();
 var creditNameJason    = new Image();
 var creditNameJesse    = new Image();
+
 
 var sMitchellL = "MITCHELL LUTZKE";
 var sAlexS     = "ALEX SOHAIL";
@@ -150,6 +153,7 @@ soundLevelSanic.load();
 creditScreen1.src =         "./Images/credits_screen.fw.png";
 
 levelSelectBgImg.src = "./Images/state_level_select_bg.png";
+levelCompleteImg.src = "./Images/levelcomplete.png"
 
 creditNameAlex.src     =    "./Images/AlexSohailey.png";
 creditNameNick.src     =    "./Images/NickHizzle.png";

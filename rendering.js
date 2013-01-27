@@ -64,7 +64,19 @@ function draw_game() {
 			ctx.stokeStyle = "rgb(0,0,0)";
 		}
 	}
+
+
+
+	//DRAW LEVEL COMPLETE SCREEN
+	if(levelcomplete){
+	  console.log("level complete!");
+	  ctx.drawImage(levelCompleteImg,200,100);
+	}
+
 	ctx.restore();
+
+
+
 }
 
 function screenClear(currentGame){ 
@@ -222,12 +234,12 @@ function draw_world() {
 
 
 
-								if(Button_Start_Play.update() || Controller.space){////////////Have this here because I want use ecksbawks
+			if(Controller.space){////////////Have this here because I want use ecksbawks
 									
-									PlayerGame.state = GAMESTATE_GAMEPLAY;
-									currentLevel = 1;
+				PlayerGame.state = GAMESTATE_GAMEPLAY;
+				currentLevel = 1;
 										
-								}	
+			}	
 
 
 			if(	Button_Level_Select_Two.update()){

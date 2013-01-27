@@ -49,7 +49,7 @@ function key_event(event) {
 			case 69: 				Controller.e = true;			break;
 			case 82:     			Controller.r = true;			break;
 
-			case 90: 				Controller.attack = true; 		break;		// z - attack
+			case 68: 				Controller.attack = true; 		break;		// z - attack
 		}
 	}
 }
@@ -67,7 +67,7 @@ function key_event_up(event) {
 			case 69: 				Controller.e = false;			break;
 			case 82:     			Controller.r = false;			break;
 
-			case 90: 				Controller.attack = false; 	break;		// z - attack
+			case 68: 				Controller.attack = false; 	 break;		// z - attack
 		}
 	}
 }
