@@ -222,12 +222,6 @@ function draw_world() {
 
 
 
-								if(Button_Start_Play.update() || Controller.space){////////////Have this here because I want use ecksbawks
-									
-									PlayerGame.state = GAMESTATE_GAMEPLAY;
-									currentLevel = 1;
-										
-								}	
 
 
 			if(	Button_Level_Select_Two.update()){
