@@ -7,4 +7,10 @@
 	height:600px;
 	margin:0px auto;
 	background-color:#e2e2e2;
+	color:#dddddd;
+}
+
+a {
+	text-decoration: none;
+	color:#d1d1d1;
 }
