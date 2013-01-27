@@ -18,8 +18,6 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_isTrans) {
 		this.ctx.strokeStyle = this.stroke;
 		this.ctx.lineWidth   = 1;
 		this.ctx.font = '20px Calibri';
-		//wut
-		//wot
 
 		var textWidth = this.ctx.measureText(this.text).width;
 		var textHeight = this.ctx.measureText(this.text).height;
