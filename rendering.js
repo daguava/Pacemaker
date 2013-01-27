@@ -142,6 +142,9 @@ function draw_world() {
 		//Button_Start_Options.draw();
 		//Button_Start_Credits.draw();
 		//Button_Start_Play.draw();
+		
+
+
 
 		if(Button_Start_Play.update() || Controller.space){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;			
@@ -154,6 +157,7 @@ function draw_world() {
 		if(Button_Start_Options.update()){
 			PlayerGame.state = GAMESTATE_OPTIONS;			
 		}	
+
 
 	}else if(PlayerGame.state == GAMESTATE_CREDITS){
 		ctx.drawImage(creditScreen1, 0, 0);
