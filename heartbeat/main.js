@@ -12,6 +12,8 @@ var heartmanimg;
 var heartman_hurtimg;
 var heartman_deadimg;
 
+var cellheadimg;
+
 
 function HeartMan(){
 	this.health = 100;
@@ -74,22 +76,19 @@ function draw(ctx){
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(0,0,model.canvas.width,model.canvas.height)
 
-	
 	ctx.drawImage(spotlightimg,model.worldOffset,0);
 
 	if(model.heartman.health<=0){
-	ctx.drawImage(heartman_deadimg,270 + model.worldOffset ,40)
+		ctx.drawImage(heartman_deadimg,270 + model.worldOffset ,40)
 	}
 	else{
 	if(!model.heartman.hurt){
-	ctx.drawImage(heartmanimg,270 + model.worldOffset ,40)
+		ctx.drawImage(heartmanimg,270 + model.worldOffset ,40)
 	}
 	else{
-	ctx.drawImage(heartman_hurtimg, 270 + model.worldOffset, 40)
+		ctx.drawImage(heartman_hurtimg, 270 + model.worldOffset, 40)
 	}
 	}
-
-
 
 	var l = model.gloves.left;
 	ctx.drawImage(glove_leftimg, l.xpos - l.width/2,l.ypos,l.width,l.height)
@@ -105,6 +104,11 @@ function draw(ctx){
 	
 	ctx.drawImage(enemyheartlogoimg, 120,10,150,100);
 
+	ctx.save();
+	ctx.translate(model.mouseX,l.ypos + 150);
+	ctx.rotate((model.canvas.width/2 - model.mouseX)/-1000);
+	ctx.drawImage(cellheadimg, -150,-150,300,300)
+	ctx.restore();
 
 }
 
@@ -196,7 +200,8 @@ function init(){
 	heartman_deadimg = new Image();
 	heartman_deadimg.src = "heartman_dead.png";
 
-
+	cellheadimg = new Image();
+	cellheadimg.src = "backofhead.png";
 
 	document.addEventListener("mousemove", mouse_move);
 	document.addEventListener("mousedown", mouse_down);
