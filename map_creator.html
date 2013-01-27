@@ -218,6 +218,12 @@ function begin_game() {
 		}
 	}
 
+	for(i = 0; i<map[0].length; i++){
+		map[0][i] = 1;
+		map[5][i] = 1;
+		map[6][i] = 1;
+		map[map.length-1][i] = 1;
+	}
 
 	// prepare context for object creation
 	var canvas = document.getElementById("draw_canvas");
