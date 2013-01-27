@@ -45,8 +45,10 @@ function Player(x_pos, y_pos) {
 	this.speed = 5;			// speed (in pixels per frame)
 	this.airtime = 0;		// time bucky has been in the air (used for falling)
 	this.image = new Image();
-	this.width = 100;		// collision width of bucky (so he overlaps things a bit)
-	this.height = 100;		// collision height of bucky (so he overlaps things a bit)
+	this.width = 200;		// collision width of bucky (so he overlaps things a bit)
+	this.height = 200;		// collision height of bucky (so he overlaps things a bit)
+	this.hit_height = 100;
+	this.hit_width = 200;
 	this.grounded = false;
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
@@ -123,6 +125,8 @@ function Player(x_pos, y_pos) {
 				this.attacking = true;
 				attack_occurring = true;
 			}
+
+//I Like Turtles
 
 			if(attack_occurring){
 				attack_timer += 3 *  fpsControl;
@@ -234,7 +238,7 @@ function Player(x_pos, y_pos) {
 
 		// loop through each collectable item. If the dist between it and character is small, collect it
 		for(var i = 0; i<collectable.length; i++){
-			if(distanceBetween(this, collectable[i]) < this.height/2){
+			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
 				collectable_count++;
 				collectable.splice(i, 1);
@@ -242,7 +246,7 @@ function Player(x_pos, y_pos) {
 		}
 
 		for(var i = 0; i<punchwall.length; i++){
-			if(distanceBetween(this, punchwall[i]) < this.height/2){
+			if(distanceBetween(this, punchwall[i]) < this.hit_width/2){
 				if(this.attacking){
 					punchwall[i].hidden = true;
 					punchwall.splice(i, 1);
@@ -264,12 +268,25 @@ function Player(x_pos, y_pos) {
 
 		// change to facing right image if moving right, or not moving
 		if(this.x_dir == 1 || this.x_dir == 0){
+
 			if(this.walk_switch && this.airtime < jumping_threshold){
-				this.rotation = 0;
-				this.image = char_right_second;
+				if(grav_const == 1){
+					this.rotation = 0;
+					this.image = char_right_second;
+				} else {
+					this.rotation = 0;
+					this.image = char_right_top2;	
+				}
+				
 			} else if (this.airtime < jumping_threshold){
-				this.image = char_right;
-				this.rotation = 0;
+				if(grav_const == 1){
+					this.image = char_right;
+					this.rotation = 0;
+				} else {
+					this.image = char_right_top;
+					this.rotation = 0;
+				}
+
 			} else {
 				this.image = char_right_jump;
 			}
@@ -286,7 +303,7 @@ function Player(x_pos, y_pos) {
 			}
 		}
 		if(this.attacking){
-			this.image = char_right_jump;
+			this.image = char_attack;
 		}
 	}
 
@@ -308,15 +325,20 @@ function Player(x_pos, y_pos) {
 
 		for(var i = 0; i<platforms.length; i++){
 
-			centerPlayerX = this.x + this.width/2 + 6;
-			centerPlayerY = this.y + this.height/2;
+			centerPlayerX = this.x + this.hit_width/2;
+			if(grav_const == 1){
+				centerPlayerY = this.y + this.hit_height*1.5;
+			} else {
+				centerPlayerY = this.y + this.hit_height*(2/3);
+			}
+			
 			centerRectX = platforms[i].x + platforms[i].width/2;
 			centerRectY = platforms[i].y + platforms[i].height/2;
 
 			distanceX = centerPlayerX - centerRectX;
 			distanceY = centerPlayerY - centerRectY;
 			minDistanceX = this.width/2 + platforms[i].width/2;
-			minDistanceY = this.height/2 + platforms[i].height/2;
+			minDistanceY = this.hit_height/2 + platforms[i].height/2;
 
 			if(Math.abs(distanceX) >= minDistanceX || Math.abs(distanceY) >= minDistanceY){
 				depthX = 0;
