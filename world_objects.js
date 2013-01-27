@@ -76,6 +76,7 @@ function Player(x_pos, y_pos) {
 			//this.x_speed = 0;
 			//platform_update = 0;
 			// death animation
+			grav_const = 1;
 			this.y_speed = 7;
 			this.y_dir = -1;
 			this.airtime = 0;
@@ -362,6 +363,9 @@ function Player(x_pos, y_pos) {
 			} else {
 				depthX = distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
 				depthY = distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
+				if(platforms[i].type == 2){
+					this.dead = true;
+				}
 			}
 
 			if(Math.abs(depthY) < Math.abs(depthX)){ // resolve y first if true

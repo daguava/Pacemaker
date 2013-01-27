@@ -116,6 +116,7 @@ function drawUI(context){
 		context.fillStyle = "rgb(240,240,240)";
 		context.fillText(" x ", 57, 42);
 		context.fillText("   " + collectable_count, 60, 43);
+		context.fillText("SCORE: " + (collectable_count * 10 + (CurrPlayer.x - platform_x_movement) / 100).toFixed(1), 500, 35);
 	}
 
 	if(CurrPlayer.dead){

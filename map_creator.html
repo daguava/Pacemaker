@@ -11,8 +11,8 @@ var blocksWidth		= parseInt(prompt("Enter how many blocks wide", ""));
 var blocksHeight	= parseInt(prompt("Enter how many blocks tall\n12 is recommended for PaceMaker", ""));
 alert("1 - 6 to select your tile.\nLeft Click Adds. Right Click Removes.\nShift to display array. ");
 
-var gameWidth = blocksWidth * 50;
-var gameHeight = blocksHeight * 50;
+var gameWidth = blocksWidth * 12;
+var gameHeight = blocksHeight * 12;
 
 var blockChoice = 0;
 
@@ -77,8 +77,8 @@ function Platform(x, y) {
 	this.y = y;
 	this.image = new Image();
 	this.image.src = "./Images/grass_tile.gif";
-	this.width = 50;
-	this.height = 50;
+	this.width = 12;
+	this.height = 12;
 }
 
 function Game(ctx, x_boundary, y_boundary, frame_delay){
@@ -244,18 +244,26 @@ function frame(){
 
 	//Figures out which tile is clicked; if valid, adds selected tile to the map
 	if(Controller.mouse_left){
-		x_tile = Math.floor(x/50);
-		y_tile = Math.floor(y/50);
+		x_tile = Math.floor(x/12);
+		y_tile = Math.floor(y/12);
 		if(y_tile < blocksHeight && x_tile < blocksWidth)
 		map[y_tile][x_tile] = blockChoice;
 	}
 
 	//Figures out which tile is clicked; if valid, removes tile from the map
 	if(Controller.mouse_right){
-		x_tile = Math.floor(x/50);
-		y_tile = Math.floor(y/50);
+		x_tile = Math.floor(x/12);
+		y_tile = Math.floor(y/12);
 		if(y_tile < blocksHeight && x_tile < blocksWidth && y_tile > 0 && x_tile > 0)
 		map[y_tile][x_tile] = 0;
+	}
+
+	if(Controller.mouse_middle){
+		y_row = Math.floor(y/12);
+		for(var i = 0; i<map[0].length; i++){
+			if(y_row < blocksHeight && y_row > 0)
+			map[y_row][i] = blockChoice;
+		}
 	}
 
     if(Controller.one){
@@ -352,41 +360,41 @@ function draw_world() {
 		for(var i = 0; i<map.length; i++){
 			for(var k = 0; k<map[i].length; k++){
 				if(map[i][k]==1){
-					ctx.drawImage(Ground.image, k*50, i*50);
+					ctx.drawImage(Ground.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k]==2){
-					ctx.drawImage(Jump.image, k*50, i*50);
+					ctx.drawImage(Jump.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k]==3){
-					ctx.drawImage(Duck.image, k*50, i*50);
+					ctx.drawImage(Duck.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k]==4){
-					ctx.drawImage(Smash.image, k*50, i*50);
+					ctx.drawImage(Smash.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k]==5){
-					ctx.drawImage(Switch.image, k*50, i*50);
+					ctx.drawImage(Switch.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k]==6){
-					ctx.drawImage(Blood.image, k*50, i*50);
+					ctx.drawImage(Blood.image, k*12, i*12, 12, 12);
 				}
 				if(map[i][k] ==7){
-					ctx.drawImage(EndLevel.image,k*50,i*50);
+					ctx.drawImage(EndLevel.image,k*12,i*12, 12, 12);
 				}
 			}
 		}
 		
 		ctx.stokeStyle = "rgb(0,0,0)";
-		for(var i = 0; i*50<=blocksWidth*50; i++){
+		for(var i = 0; i*12<=blocksWidth*12; i++){
 			ctx.stokeStyle = "rgb(0,0,0)";
 			ctx.beginPath();
-  			ctx.moveTo(0,i*50);
-  			ctx.lineTo(blocksWidth*50,i*50);
+  			ctx.moveTo(0,i*12);
+  			ctx.lineTo(blocksWidth*12,i*12);
   			ctx.stroke();
 
   			ctx.stokeStyle = "rgb(0,0,0)";
   			ctx.beginPath();
-  			ctx.moveTo(i*50,0);
-  			ctx.lineTo(i*50,blocksHeight*50);
+  			ctx.moveTo(i*12,0);
+  			ctx.lineTo(i*12,blocksHeight*12);
   			ctx.stroke();
 
   			ctx.stokeStyle = "rgb(0,0,0)";

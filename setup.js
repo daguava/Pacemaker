@@ -477,6 +477,7 @@ console.log(gamepad);
 		for(var k = 0; k<map[i].length; k++){
 			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4){
 				platforms.push(new Platform(k*blocksize, i*blocksize, map[i][k]));
+				platforms[platforms.length-1].type = map[i][k];
 			}
 			if(map[i][k]==6){
 				collectable.push(new Item(k*blocksize, i*blocksize));
