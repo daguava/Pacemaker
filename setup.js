@@ -26,6 +26,8 @@ var char_right_jump = new Image();
 var char_right_second = new Image();
 var char_attack = new Image();
 var char_attack_top = new Image();
+var EndOfMap = 0;
+var levelcomplete = false;
 
 var x_check;2
 var y_check;
@@ -247,6 +249,9 @@ imageMap = new Array(map.length);
 					imageMap[i][k] = Switch.image;
 				}
 			
+				if(map[i][k]==7){
+					EndOfMap = k * blocksize;
+				}
 		if(imageMap[i][k] == undefined) imageMap[i][k] = null;
 		}
 	}

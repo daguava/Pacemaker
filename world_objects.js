@@ -81,6 +81,15 @@ function Player(x_pos, y_pos) {
 	////////////////////////////////////////////////////////////////////////////////////////// Player's update function
 
 	function update(){
+
+
+
+		if(this.x-platform_x_movement >= EndOfMap){
+			levelcomplete = true;
+		}
+
+
+
 		this.last_x = this.x;
 		this.y_dir = 0;
 		this.x_dir = 0;
@@ -205,7 +214,7 @@ function Player(x_pos, y_pos) {
 		}
 
 		// if we've moved too far from the left edge, scroll screen instead of character
-		if(this.x >= 250 && this.x_dir == 1){
+		if(this.x >= 250 && this.x_dir == 1 && !levelcomplete){
 			// move platforms
 			platform_x_movement -= this.x_dir * this.x_speed*fpsControl;
 			platform_update = -1 * this.x_dir * this.x_speed*fpsControl;
@@ -215,7 +224,7 @@ function Player(x_pos, y_pos) {
 				this.distance_since_sprite_change += Math.floor(this.x_speed*fpsControl);
 			}
 
-		} else if(this.x<= 200 && this.x_dir == -1){
+		} else if(this.x<= 200 && this.x_dir == -1 && !levelcomplete){
 			// move platforms
 			platform_x_movement -= this.x_dir * this.x_speed*fpsControl;
 			platform_update = -1 * this.x_dir * this.x_speed*fpsControl;
