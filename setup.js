@@ -118,6 +118,45 @@ var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
 
+
+
+//audio stuff
+var channelmax = 10;
+audiochannels = new Array();
+for (a=0; a<channelmax; a++){
+	audiochannels[a] = new Array();
+	audiochannels[a]['channel'] = new Audio();
+	audiochannels[a]['finished'] = -1;
+}
+
+function playmultiplesound(s){
+	for (a=0; a<audiochannels.length; a++){
+		thistime = new Date();
+		//IF this channel is finished
+		if(audiochannels[a]['finished'] < this.getTime()){
+			audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+	        audiochannels[a]['channel'].src = document.getElementById(s).src;
+	        audiochannels[a]['channel'].load();
+	        audiochannels[a]['channel'].play();
+	        break;
+		}
+	}
+}
+
+function playsinglesound(){
+	var soundfile = "";
+	soundfile.src = "./sounds/BREAK01.wav";
+	soundfile.play();
+	
+}
+
+
+playsinglesound();
+
+
+
+
+
 creditScreen1.src =         "./Images/credits_screen.fw.png";
 
 creditNameAlex.src     =    "./Images/AlexSohailey.png";
