@@ -32,7 +32,7 @@ var attack_occurring = false;
 var attack_timer = 0;
 
 
-var debug = true;
+var debug = false;
 var grid = false;
 
 var fpsWave = 60;
