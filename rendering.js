@@ -127,7 +127,6 @@ function draw_world() {
 
 
 		LoadMitchell();
-		
 		LoadJason();
 		LoadNick();
 		LoadAlex();
