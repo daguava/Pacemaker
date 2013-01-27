@@ -259,7 +259,7 @@ console.log(gamepad);
 	Controller = new Control();
 	PlayerGame = new Game(ctx, gameWidth, gameHeight, 10);		// (context, x_boundary, y_boundary, ms_delay)
 	PlayerGame.clearColor = "rgb(135,206,235)";
-	CurrPlayer = new Player(50, 300);				// (x-position, y-position)
+	CurrPlayer = new Player(50, 400);				// (x-position, y-position)
 
 
 

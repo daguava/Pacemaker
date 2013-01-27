@@ -45,10 +45,10 @@ function Player(x_pos, y_pos) {
 	this.speed = 5;			// speed (in pixels per frame)
 	this.airtime = 0;		// time bucky has been in the air (used for falling)
 	this.image = new Image();
-	this.width = 200;		// collision width of bucky (so he overlaps things a bit)
-	this.height = 200;		// collision height of bucky (so he overlaps things a bit)
+	this.width = 100;		// collision width of bucky (so he overlaps things a bit)
+	this.height = 100;		// collision height of bucky (so he overlaps things a bit)
 	this.hit_height = 100;
-	this.hit_width = 200;
+	this.hit_width = 100;
 	this.grounded = false;
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
@@ -334,9 +334,9 @@ function Player(x_pos, y_pos) {
 
 			centerPlayerX = this.x + this.hit_width/2;
 			if(grav_const == 1){
-				centerPlayerY = this.y + this.hit_height*1.5;
+				centerPlayerY = this.y + this.hit_height/2;
 			} else {
-				centerPlayerY = this.y + this.hit_height*(2/3);
+				centerPlayerY = this.y + this.hit_height/2;
 			}
 			
 			centerRectX = platforms[i].x + platforms[i].width/2;
