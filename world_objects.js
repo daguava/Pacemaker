@@ -88,12 +88,6 @@ function Player(x_pos, y_pos) {
 
 
 		soundLevel1.loop().play().mute();
-		
-		/*
-		if(soundLevel1.getPercent(49)){
-		soundLevel12.loop().play().mute();
-		}*/
-
 		soundLevel2.loop().play().mute();
 		soundLevel3.loop().play().mute();
 		soundLevel4.loop().play().mute();
@@ -297,6 +291,20 @@ function Player(x_pos, y_pos) {
 
 				collectable.splice(i, 1);
 			}
+		}
+
+
+		if(collectable_count == 0){
+			soundLevel1.setVolume(20)
+		}
+		if(collectable_count == 2){
+				soundLevel1.setVolume(40)
+		}
+		if(collectable_count == 4){
+				soundLevel1.setVolume(60)
+		}
+		if(collectable_count == 5){
+		soundLevel1.setVolume(80)
 		}
 
 
