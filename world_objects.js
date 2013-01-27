@@ -260,12 +260,14 @@ function Player(x_pos, y_pos) {
 		}
 
 
+		var jumping_threshold = 1.2;
+
 		// change to facing right image if moving right, or not moving
 		if(this.x_dir == 1 || this.x_dir == 0){
-			if(this.walk_switch && this.airtime < 0.5){
+			if(this.walk_switch && this.airtime < jumping_threshold){
 				this.rotation = 0;
 				this.image = char_right_second;
-			} else if (this.airtime < 0.5){
+			} else if (this.airtime < jumping_threshold){
 				this.image = char_right;
 				this.rotation = 0;
 			} else {
@@ -273,10 +275,10 @@ function Player(x_pos, y_pos) {
 			}
 		} else {
 			// change to facing left image if moving left
-			if(this.walk_switch && this.airtime < 0.5){
+			if(this.walk_switch && this.airtime < jumping_threshold){
 				this.image = char_left_second;
 				this.rotation = 0;
-			} else if(this.airtime < 0.5) {
+			} else if(this.airtime < jumping_threshold) {
 				this.rotation = 0;
 				this.image = char_left;
 			} else {
