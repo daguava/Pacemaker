@@ -1,4 +1,4 @@
-
+var playerData;
 
 
 function Item(x, y) {
@@ -48,10 +48,18 @@ function PlayerData(){
 
 	var lvl4 = new LevelData();
 
+	this.levels.push(lvl1);
+
+	this.levels.push(lvl2);
+
+	this.levels.push(lvl3);
+
+	this.levels.push(lvl4);
+
 }
 
 function Player(x_pos, y_pos) {
-
+playerData = new PlayerData();
 
 	this.init = function(){
 	this.x = x_pos;

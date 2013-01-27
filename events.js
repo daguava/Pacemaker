@@ -36,6 +36,7 @@ function mouse_press(event) {
 
 	////////////////////////////////////////////////////////////////////////////////////////// KEY PRESSED DOWN
 function key_event(event) {
+	//console.log(event.keyCode)
 	if(!ControllerUse){
 		switch(event.keyCode){
 			case 16:				Controller.shift = true;		break;		// shift
@@ -50,6 +51,8 @@ function key_event(event) {
 			case 82:     			Controller.r = true;			break;
 
 			case 68: 				Controller.attack = true; 		break;		// z - attack
+
+			case 13: 				Controller.enter = true;		break;
 		}
 	}
 }
@@ -68,6 +71,8 @@ function key_event_up(event) {
 			case 82:     			Controller.r = false;			break;
 
 			case 68: 				Controller.attack = false; 	 break;		// z - attack
+
+			case 13:                Controller.enter = false; 
 		}
 	}
 }

@@ -12,6 +12,9 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColo
 	this.currentFill = textColor;
 	this.currentStroke = textColor;
 
+	this.bgColor = "rgba(255,255,255,.5)";
+	this.bgColor_Hovered = "rgba(0,0,0,.5)";
+
 	this.b_hasBg = b_hasBg;
 	this.alpha = 100;
 	this.hovered = false;
@@ -21,8 +24,14 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColo
 		this.ctx.fillStyle = this.currentFill / 10;
 
 		//var textX = this.x ;//+ this.width/2 - textWidth/2;
-		this.ctx.fillStyle = "rgba(200,200,200,.5)";
+		
 		if(this.b_hasBg){
+			if(this.hovered){
+		this.ctx.fillStyle = this.bgColor;
+		}
+		else{
+		this.ctx.fillStyle = this.bgColor_Hovered;
+	}
     	this.ctx.fillRect(this.x, this.y, this.width, this.height);
     	}
     	//this.ctx.strokeRect(this.x, this.y, this.width, this.height);
@@ -39,10 +48,12 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColo
 		if(this.mouseOvered()){
 			this.currentFill = "#0000CC";
 			this.currentStroke = "#0000CC";
+			this.hovered = true;
 		}
 		else{
 			this.currentFill = this.trueFill;
 			this.currentStroke = this.trueStroke;
+			this.hovered = false;
 		}
 
 		this.draw();

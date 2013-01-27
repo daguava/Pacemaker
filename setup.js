@@ -76,7 +76,7 @@ var creditNameJesse    = new Image();
 var sMitchellL = "MITCHELL LUTZKE";
 var sAlexS     = "ALEX SOHAIL";
 var sNickH     = "NICK HEINDL";
-var sJasonA    = "JASON ALTEKRUSE";
+var sJasonA    = "JASON'S GIRLFRIEND";
 var sJesseK    = "JESSE KRIZENESKY";
 
 var sBuildMitchell = "";

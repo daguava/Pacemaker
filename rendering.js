@@ -70,7 +70,16 @@ function draw_game() {
 	//DRAW LEVEL COMPLETE SCREEN
 	if(levelcomplete){
 	  console.log("level complete!");
-	  ctx.drawImage(levelCompleteImg,200,100);
+	  ctx.drawImage(levelCompleteImg, 200, 100);
+
+
+	  playerData.levels[currentLevel].best = collectable_count;
+	  playerData.levels[currentLevel].beaten = true;
+
+	  if(Controller.enter == true){
+	 	PlayerGame.state = GAMESTATE_LEVEL_SELECT;
+	  }
+
 	}
 
 	ctx.restore();
@@ -124,6 +133,10 @@ function drawUI(context){
 		context.font = '30px Calibri';
 		context.fillText("You dead bro?",																230,	35);
 	}
+	context.font = '30px Calibri';
+	context.fillText("Level: " + currentLevel + " Complete:" + levelcomplete,130,55);
+
+
 	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ //Known Bug - can pause while jumped
 				context.fillStyle = "rgba(50,50,50,0.5)";
 				context.fillRect(527, 247, 145, 50);
@@ -131,6 +144,41 @@ function drawUI(context){
 				context.font = '30px Calibri';
 				context.fillText("Paused",																		550,	280);
 	}
+}
+
+
+function updateButtonText(){
+
+	Button_Level_Select_One.text =  "Lvl1 - Best - " + playerData.levels[0].best + "/" + playerData.levels[0].max;
+
+	
+	if(playerData.levels[0].beaten){
+		Button_Level_Select_Two.text =  "Lvl2 - Best - " + playerData.levels[1].best + "/" + playerData.levels[1].max;
+	} 
+
+	else{
+		Button_Level_Select_Two.text =  "Locked (???)"
+	}
+
+
+
+	if(playerData.levels[1].beaten){
+		Button_Level_Select_Three.text =  "Lvl3 - Best - " + playerData.levels[2].best + "/" + playerData.levels[2].max;
+	} 
+
+	else{
+		Button_Level_Select_Three.text =  "Locked (???)"
+	}
+
+
+	if(playerData.levels[2].beaten){
+		Button_Level_Select_Four.text =  "Lvl4 - Best - " + playerData.levels[2].best + "/" + playerData.levels[2].max;
+	} 
+
+	else{
+		Button_Level_Select_Four.text =  "Locked (???)"
+	}
+
 }
 
 //DRAW EVERYTHING
@@ -224,6 +272,7 @@ function draw_world() {
 		}
 	}
 	else if(PlayerGame.state == GAMESTATE_LEVEL_SELECT){
+		updateButtonText();
 			ctx.drawImage(levelSelectBgImg,0,0);
 			if(	Button_Level_Select_One.update()){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
@@ -237,7 +286,7 @@ function draw_world() {
 			if(Controller.space){////////////Have this here because I want use ecksbawks
 									
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				currentLevel = 1;
+				loadGame();
 										
 			}	
 
