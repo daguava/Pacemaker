@@ -53,8 +53,6 @@ function Player(x_pos, y_pos) {
 		this.y_dir = 0;
 		this.x_dir = 0;
 
-		
-
 		// Perform death animation
 		if(this.dead && !this.deathAnimToggle){
 			this.deathAnimToggle = true
@@ -76,7 +74,7 @@ function Player(x_pos, y_pos) {
 
 			// lets the player switch gravities as long as they're on the ground
 			if(( (Controller.up && grav_const == 1 ) && this.grounded ) || ((Controller.down && grav_const == -1) && this.grounded)){
-			grav_const *= -1;
+				grav_const *= -1;
 			}
 
 			// jump toggle used to prevent double jumps
@@ -125,7 +123,6 @@ function Player(x_pos, y_pos) {
 				this.x_speed = 10;
 				this.x_dir = 1;
 			}
-			
 		
 		}
 		
@@ -146,7 +143,6 @@ function Player(x_pos, y_pos) {
 		else{
 			this.y += new_y_speed * fpsControl;
 		}
-
 
 		// if we've moved too far from the left edge, scroll screen instead of character
 		if(this.x >= 350 && this.x_dir == 1){
@@ -202,7 +198,6 @@ function Player(x_pos, y_pos) {
 			this.detect_collision_platform();
 		}
 		
-
 		// loop through each collectable item. If the dist between it and character is small, collect it
 		for(var i = 0; i<collectable.length; i++){
 			if(distanceBetween(this, collectable[i]) < this.height/2){
@@ -221,10 +216,10 @@ function Player(x_pos, y_pos) {
 
 		// change to facing right image if moving right, or not moving
 		if(this.x_dir == 1 || this.x_dir == 0){
-			if(this.walk_switch && this.airtime < 0.5){
+			if(this.walk_switch && this.airtime < 1.2){
 				this.rotation = 0;
 				this.image = char_right_second;
-			} else if (this.airtime < 0.5){
+			} else if (this.airtime < 1.2){
 				this.image = char_right;
 				this.rotation = 0;
 			} else {
@@ -232,10 +227,10 @@ function Player(x_pos, y_pos) {
 			}
 		} else {
 			// change to facing left image if moving left
-			if(this.walk_switch && this.airtime < 0.5){
+			if(this.walk_switch && this.airtime < 1.2){
 				this.image = char_left_second;
 				this.rotation = 0;
-			} else if(this.airtime < 0.5) {
+			} else if(this.airtime < 1.2) {
 				this.rotation = 0;
 				this.image = char_left;
 			} else {
