@@ -66,11 +66,8 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColo
 	}
 
 	this.clicked = function(){
-		var bool = Controller.click_mouse_y <= this.y+this.height && Controller.click_mouse_y >= this.y
+		return Controller.click_mouse_y <= this.y+this.height && Controller.click_mouse_y >= this.y
 		&& Controller.click_mouse_x <= this.x+this.width && Controller.click_mouse_x >=this.x;
-		Controller.click_mouse_y = 0;
-		Controller.click_mouse_x = 0;
-		return bool;
 	}
 }
 
