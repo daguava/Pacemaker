@@ -126,6 +126,8 @@ function Player(x_pos, y_pos) {
 				attack_occurring = true;
 			}
 
+//I Like Turtles
+
 			if(attack_occurring){
 				attack_timer += 3 *  fpsControl;
 			}
