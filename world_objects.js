@@ -145,8 +145,10 @@ function Player(x_pos, y_pos) {
 				this.x_speed = 3;
 			}
 
+			// if r is pressed, reset
 			if(Controller.r){
-				resetGame();
+
+				PlayerGame.resetGame();
 			}
 
 
