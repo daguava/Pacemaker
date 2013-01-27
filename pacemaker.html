@@ -86,10 +86,11 @@ function Game(ctx, x_boundary, y_boundary, frame_delay){
 		platforms = new Array();
 		platform_update = 0;
 		grav_const = 1;
-		begin_game();
-		clearTimeout(gametimeout);
-
 		ControllerUse = false;
+		begin_game();
+		clearTimeout(gametimeout);/////////////is this affected?
+
+		
 	}
 }
 
