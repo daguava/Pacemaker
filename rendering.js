@@ -118,6 +118,9 @@ function drawUI(context){
 function draw_world() {  
 
 	if (PlayerGame.state == GAMESTATE_GAMEPLAY){
+
+		soundLevel1.unmute(); //////////////////////Start making sound in the gameplay, added here because fuggit
+
 		draw_game();
 	
 

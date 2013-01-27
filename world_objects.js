@@ -64,7 +64,22 @@ function Player(x_pos, y_pos) {
 
 	this.init();
 
-	//Player's update function
+
+		soundLevel1.loop().play().mute();
+		
+		/*
+		if(soundLevel1.getPercent(49)){
+		soundLevel12.loop().play().mute();
+		}*/
+
+		soundLevel2.loop().play().mute();
+		soundLevel3.loop().play().mute();
+		soundLevel4.loop().play().mute();
+		soundLevelSanic.loop().play().mute();
+
+
+	////////////////////////////////////////////////////////////////////////////////////////// Player's update function
+
 	function update(){
 		this.last_x = this.x;
 		this.y_dir = 0;
@@ -249,11 +264,25 @@ function Player(x_pos, y_pos) {
 			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
 				collectable_count++;
-								mySound.play();
-
 				collectable.splice(i, 1);
 			}
 		}
+
+
+		if(collectable_count == 8){ ////// Hard code to 8 because it should matter (FR goes fast enough) and #YOLOSWAG
+				soundLevel2.unmute();
+		}
+		if(collectable_count == 16){ ////// Hard code to 16 because it should matter (FR goes fast enough) and #YOLOSWAG
+				soundLevel3.unmute();
+		}
+		if(collectable_count == 24){ ////// Hard code to 24 because it should matter (FR goes fast enough) and #YOLOSWAG
+				soundLevel4.unmute();
+		}
+		if(collectable_count == 32){ ////// Hard code to 32 because it should matter (FR goes fast enough) and #YOLOSWAG
+				soundLevelSanic.unmute();
+		}
+
+
 
 		for(var i = 0; i<punchwall.length; i++){
 			if(distanceBetween(this, punchwall[i]) < this.hit_width/2){
