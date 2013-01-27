@@ -458,7 +458,7 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 	//Syntax for buttons --> What Gamestate it is at _ What Gamestate it is going to
 	//GAMESTATE_START
 	Button_Start_Play = new Button(900, 280, 120, 50, "Play", ctx, false, "#000000");
-	Button_Start_Options = new Button(900, 355, 180, 50, "Options", ctx, false, "#000000");
+	Button_Start_Options = new Button(900, 355, 180, 50, "Controls", ctx, false, "#000000");
 	Button_Start_Credits = new Button(900, 430, 160, 50, "Credz", ctx, false, "#000000");
 
 	//GAMESTATE_GAMEPLAY
