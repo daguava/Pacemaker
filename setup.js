@@ -53,7 +53,6 @@ var optionsScreen = new Image();
 var gamepad = new Gamepad();
 
 var creditScreen1      = new Image();
-var creditScreen2      = new Image();
 var creditNameAlex     = new Image();
 var creditNameNick     = new Image();
 var creditNameMitchell = new Image();
@@ -91,7 +90,7 @@ var iStringPositionJesse    = 0;
 
 var bJesseK    = 1;
 var bNickH     = 1;
-var bMitchellL = 1;
+var bMitchellL = 0;
 var bAlexS     = 1;
 var bJasonA    = 1;
 
@@ -119,7 +118,7 @@ var iArrayPosition = 0;
 
 
 
-creditScreen1.src =         "./Images/test_background.jpg";
+creditScreen1.src =         "./Images/credits_screen.fw.png";
 
 creditNameAlex.src     =    "./Images/AlexSohailey.png";
 creditNameNick.src     =    "./Images/NickHizzle.png";
