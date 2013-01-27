@@ -90,31 +90,32 @@ var iStringPositionJesse    = 0;
 
 var bJesseK    = 1;
 var bNickH     = 1;
-var bMitchellL = 0;
-var bAlexS     = 1;
-var bJasonA    = 1;
+var bMitchellL = 1;
+var bAlexS     = 0;
+var bJasonA    = 0;
 
 
 
 var iXTextPositionMitchell = 210;
+var iXTextPositionAlex     = 600;
 var iXTextPositionNick     = 210;
+var iXTextPositionJason    = 600;
 var iXTextPositionJesse    = 210;
-var iXTextPositionAlex     = 210;
-var iXTextPositionJason    = 210;
+
 
 //Mitchell Alex and nick work
 var iYTextPositionMitchell = 300;
-var iYTextPositionNick     = 350;
+var iYTextPositionAlex     = 350;
+var iYTextPositionNick     = 400;
 var iYTextPositionJason    = 450;
-var iYTextPositionAlex     = 400;
 var iYTextPositionJesse    = 500;
 
 
-var iCounter = 33;
+var iCounter         = 33;
 var iCounterMitchell = 0;
-var iCounterMin = 33;
-var iCounterMax = 126;
-var iArrayPosition = 0;
+var iCounterMin      = 33;
+var iCounterMax      = 126;
+var iArrayPosition   = 0;
 
 
 

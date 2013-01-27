@@ -126,8 +126,12 @@ function draw_world() {
 		ctx.drawImage(creditScreen1, 0, 0);
 
 
-		IntToAscii();
+		LoadMitchell();
 		
+		LoadJason();
+		LoadNick();
+		LoadAlex();
+		LoadJesse();
 		
 		
 		//Permanently display text to the screen
@@ -138,19 +142,19 @@ function draw_world() {
 		//Draw permanent names to Credit's canvas
 		if(aMitchellL != null)
 		{
-	        ctx.fillText(sBuildMitchell, iXTextPositionMitchell, iYTextPositionMitchell);
+	        ctx.fillText(sBuildMitchell, 210, 300);
 		}
 		if(aAlexS != null){
-			ctx.fillText(sBuildAlex, iXTextPositionAlex, iYTextPositionMitchell);
+			ctx.fillText(sBuildAlex, 600, 350);
 		}
 		if(aNickH != null){
-			ctx.fillText(sBuildNick, iXTextPositionNick, iYTextPositionNick);
+			ctx.fillText(sBuildNick, 210, 400);
 		}
 		if(aJasonA != null){
-			ctx.fillText(sBuildJason, 50, iYTextPositionJason);
+			ctx.fillText(sBuildJason, 600, 450);
 		}
 		if(aJesseK != null){
-			ctx.fillText(sBuildJesse, 50, iYTextPositionJesse);
+			ctx.fillText(sBuildJesse, 210, 500);
 		}
 		
 		
@@ -175,10 +179,8 @@ function draw_world() {
 
 
 
-function IntToAscii(){
+function LoadMitchell(){
 	
-		//var iXTextPosition = 0;
-        //var iYTextPosition = 0;
 		var x = String.fromCharCode(iCounter);
 
 
@@ -215,9 +217,18 @@ function IntToAscii(){
 			}
 			
 		}
-		
-		//Jason is broken
+}
+
+
+
+
+
+
+function LoadJason(){
+	
 		if(bJasonA == 0){
+			
+		var x = String.fromCharCode(iCounter);
 
 			if(iStringPositionJason < sJasonA.length){
 				if(x == sJasonA.charAt(iStringPositionJason)){
@@ -241,11 +252,16 @@ function IntToAscii(){
 				}
 			}
 		}
+}
+		
 
-		
-		
-	
+
+
+
+function LoadAlex(){		
 		if(bAlexS == 0){
+		    var x = String.fromCharCode(iCounter);
+
 			if(iStringPositionAlex < sAlexS.length){
 				if(x == sAlexS.charAt(iStringPositionAlex)){
 					
@@ -270,8 +286,12 @@ function IntToAscii(){
 				}
 			}
 		}
-		
+}
+
+
+function LoadNick(){		
 		if(bNickH == 0){
+			var x = String.fromCharCode(iCounter);
 			if(iStringPositionNick < sNickH.length){
 				//document.getElementById("debug_info").innerHTML += (iStringPositionNick + "fuck me<br/>");
 				if(x == sNickH.charAt(iStringPositionNick)){
@@ -296,9 +316,11 @@ function IntToAscii(){
 				}
 			}
 		}
-		
-		if(bJesseK == 0)
-		{
+}
+
+function LoadJesse(){
+		if(bJesseK == 0){
+			var x = String.fromCharCode(iCounter);
 			if(iStringPositionJesse < sJesseK.length){
 				if(x == sJesseK.charAt(iStringPositionJesse)){
 					
@@ -320,8 +342,7 @@ function IntToAscii(){
 					iCounter++;
 				}
 			}
-		}
-				
-	
-}
+		}				
+}	
+
 
