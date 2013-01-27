@@ -45,10 +45,10 @@ function Player(x_pos, y_pos) {
 	this.speed = 5;			// speed (in pixels per frame)
 	this.airtime = 0;		// time bucky has been in the air (used for falling)
 	this.image = new Image();
-	this.width = 100;		// collision width of bucky (so he overlaps things a bit)
-	this.height = 100;		// collision height of bucky (so he overlaps things a bit)
-	this.hit_height = 50;
-	this.hit_width = 50;
+	this.width = 200;		// collision width of bucky (so he overlaps things a bit)
+	this.height = 200;		// collision height of bucky (so he overlaps things a bit)
+	this.hit_height = 100;
+	this.hit_width = 200;
 	this.grounded = false;
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
@@ -238,7 +238,7 @@ function Player(x_pos, y_pos) {
 
 		// loop through each collectable item. If the dist between it and character is small, collect it
 		for(var i = 0; i<collectable.length; i++){
-			if(distanceBetween(this, collectable[i]) < this.height/2){
+			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
 				collectable_count++;
 				collectable.splice(i, 1);
@@ -246,7 +246,7 @@ function Player(x_pos, y_pos) {
 		}
 
 		for(var i = 0; i<punchwall.length; i++){
-			if(distanceBetween(this, punchwall[i]) < this.height/2){
+			if(distanceBetween(this, punchwall[i]) < this.hit_width/2){
 				if(this.attacking){
 					punchwall[i].hidden = true;
 					punchwall.splice(i, 1);
@@ -325,7 +325,7 @@ function Player(x_pos, y_pos) {
 
 		for(var i = 0; i<platforms.length; i++){
 
-			centerPlayerX = this.x + this.width/2;
+			centerPlayerX = this.x + this.hit_width/2;
 			if(grav_const == 1){
 				centerPlayerY = this.y + this.hit_height*1.5;
 			} else {
