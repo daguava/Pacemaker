@@ -118,7 +118,6 @@ var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
 
-
 creditScreen1.src =         "./Images/credits_screen.fw.png";
 
 creditNameAlex.src     =    "./Images/AlexSohailey.png";

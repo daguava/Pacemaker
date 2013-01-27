@@ -151,6 +151,7 @@ function Player(x_pos, y_pos) {
 				PlayerGame.resetGame();
 			}
 
+
 			if(Controller.space && PlayerGame.state == GAMESTATE_START){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
 			}
