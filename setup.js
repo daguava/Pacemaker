@@ -18,10 +18,16 @@ var char_right_second = new Image();
 var x_check;
 var y_check;
 var collectable = new Array();
+var punchwall = new Array();
 var grav_const = 1;
 var gamepadSupport = true;
+
 var wiper = new Transition();
 console.log(wiper)
+
+var attack_occurring = false;
+var attack_timer = 0;
+
 
 var debug = true;
 var grid = false;
@@ -176,6 +182,13 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 			Controller.down = false;
 		}
 
+		if(gamepads[0].state['B']){
+			ControllerUse = true;
+			Controller.attack = true;
+		} else if(gamepadSupport && ControllerUse) {
+			Controller.attack = false;
+		}
+
 		if(gamepads[0].state['START'] && !pauseToggle){
 			ControllerUse = true;
 			Controller.p = !Controller.p;
@@ -324,9 +337,9 @@ console.log(gamepad);
 					imageMap[i][k] = Duck.image;/////////////
 				}
 				// handle spikes and their tiling
-				if(map[i][k]==4){
-					imageMap[i][k] = Smash.image;
-				}
+				//if(map[i][k]==4){
+				//	imageMap[i][k] = Smash.image;
+				//}
 				if(map[i][k]==5){
 					imageMap[i][k] = Switch.image;//////////////
 				}
@@ -338,11 +351,14 @@ console.log(gamepad);
 	////////////////////////////////////////////////////////////////////////////////////////// SEND COLLECTABLES TO AN ARRAY FROM MAP FILE
 	for(var i = 0; i<map.length; i++){
 		for(var k = 0; k<map[i].length; k++){
-			if(map[i][k]!=0 && map[i][k] != 6){
+			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4){
 				platforms.push(new Platform(k*blocksize, i*blocksize, map[i][k]));
 			}
 			if(map[i][k]==6){
 				collectable.push(new Item(k*blocksize, i*blocksize));
+			}
+			if(map[i][k]==4){
+				punchwall.push(new PunchWall(k*blocksize, i*blocksize));
 			}
 		}
 	}

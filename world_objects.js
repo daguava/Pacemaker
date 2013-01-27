@@ -10,6 +10,17 @@ function Item(x, y) {
 	this.hidden = false;
 }
 
+function PunchWall(x, y) {
+	this.x = x;
+	this.y = y;
+	this.image = new Image();
+	this.image.src = "./Images/redbloodcell.gif";
+	this.width = blocksize;
+	this.height = blocksize;
+	this.hidden = false;
+	this.broken = false;
+}
+
 function Platform(x, y, type) {
 	this.x = x;
 	this.y = y;
@@ -42,6 +53,7 @@ function Player(x_pos, y_pos) {
 	this.dead = false;
 	this.walk_switch = false;
 	this.rotation  = 0;
+	this.attacking = false;
 
 	this.update = update;	// when this.update is called, perform the update() function
 	this.detect_collision_platform = detect_collision_platform;
@@ -94,7 +106,7 @@ function Player(x_pos, y_pos) {
 			}
 
 			// if space is pressed, and we're grounded, and the jump toggle is fine, jump
-			if(Controller.space && (this.grounded || this.grounded_last_frame) && !this.jump_hold_toggle){
+			if(Controller.space && (this.grounded || this.grounded_last_frame) && !this.jump_hold_toggle && !this.attacking){
 				if(grav_const == 1){
 					this.y_dir = -1;
 					this.y_speed = 18;
@@ -104,6 +116,22 @@ function Player(x_pos, y_pos) {
 				}
 				this.rotation = -.5;
 				this.jump_hold_toggle = true;	// set jump toggle to disable double jumping
+			}
+
+			// if grounded and attack button is pressed
+			if(Controller.attack && (this.grounded || this.grounded_last_frame) && !attack_occurring){
+				this.attacking = true;
+				attack_occurring = true;
+			}
+
+			if(attack_occurring){
+				attack_timer += 3 *  fpsControl;
+			}
+
+			if(attack_timer > 60){
+				this.attacking = false;
+				attack_occurring = false;
+				attack_timer = 0;
 			}
 
 			// if shift is pressed, go SANIC SPEED
@@ -213,6 +241,18 @@ function Player(x_pos, y_pos) {
 			}
 		}
 
+		for(var i = 0; i<punchwall.length; i++){
+			if(distanceBetween(this, punchwall[i]) < this.height/2){
+				if(this.attacking){
+					punchwall[i].hidden = true;
+					punchwall.splice(i, 1);
+				} else {
+					this.dead = true;
+				}
+				
+			}
+		}
+
 			/////////////////////////////////////////////////////////////////////////// DETERMINE IF TO TOGGLE SPRITE (FOR WALKING ANIMATION)
 		if(this.distance_since_sprite_change >= 20){
 			this.walk_switch = !this.walk_switch;
@@ -244,6 +284,9 @@ function Player(x_pos, y_pos) {
 			} else {
 				this.image = char_left_jump;
 			}
+		}
+		if(this.attacking){
+			this.image = char_right_jump;
 		}
 	}
 
