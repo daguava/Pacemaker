@@ -223,6 +223,13 @@ ControllerUse = false;
 levelcomplete = false;
 CurrPlayer.init();
 console.log("CURRENT LEVEL" + currentLevel)
+
+
+
+
+
+
+
 	
 map = maps[currentLevel];
 
