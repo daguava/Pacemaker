@@ -141,6 +141,7 @@ function Player(x_pos, y_pos) {
 
 			// if shift is pressed, go SANIC SPEED
 			if(Controller.shift){
+				mySound.play();
 				this.x_speed = 10;
 			} else {
 				this.x_speed = 3;

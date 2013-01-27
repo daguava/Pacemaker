@@ -118,8 +118,15 @@ var iCounterMin      = 33;
 var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
+var snd = new buzz.sound("./sounds/BEATA01");
 
-/*
+
+
+
+
+
+
+/*///////////////////////////////JESSES AUDIO BELOW THIS LINE
 
 //audio stuff
 var channelmax = 10;
@@ -213,7 +220,32 @@ background2.src = 			"./Images/test_background2.png";
 }())
 
 	////////////////////////////////////////////////////////////////////////////////////////// SETTING THINGS UP INITIALLY
+<<<<<<< HEAD
 function begin_game(level) {
+=======
+function begin_game() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	Controller = new Control();
+
+
+
+
+
+>>>>>>> wut
 
 
 Controller = new Control();
