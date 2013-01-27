@@ -131,7 +131,7 @@ function drawUI(context){
 		context.fillText("You dead bro?",																230,	35);
 	}
 	context.font = '30px Calibri';
-	context.fillText("Level: " + currentLevel + " Complete:" + levelcomplete,130,55);
+	context.fillText("Level: " + currentLevel + " Complete:" + levelcomplete,430,35);
 
 
 	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ //Known Bug - can pause while jumped
