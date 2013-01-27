@@ -1,15 +1,21 @@
-
-var GAMESTATE_START = 0;
-var GAMESTATE_GAMEPLAY = 1;
-var GAMESTATE_OPTIONS = 2;
-var GAMESTATE_CREDITS = 3;
-
 var canvas; 
+var ctx;
+
+//constants
+var blocksize = 50;
+var grav_const = 1;
+var gamepadSupport = true;
+var fpsWave = 60;
+var gameHeight = 600;
+var gameWidth = 1200;
+
 var ControllerUse = false;
 var background = new Image();
 var background2 = new Image();
-var blocksize = 50;
+
 var collectable_count = 0;
+
+
 var char_left = new Image();
 var char_left_jump = new Image();
 var char_left_second = new Image();
@@ -20,7 +26,8 @@ var char_right_jump = new Image();
 var char_right_second = new Image();
 var char_attack = new Image();
 var char_attack_top = new Image();
-var x_check;
+
+var x_check;2
 var y_check;
 var collectable = new Array();
 var punchwall = new Array();
@@ -32,16 +39,14 @@ var currentLevel = 0;
 var wiper = new Transition();
 
 
+
 var attack_occurring = false;
 var attack_timer = 0;
-
 
 var debug = false;
 var grid = false;
 
-var fpsWave = 60;
-var gameHeight = 600;
-var gameWidth = 1200;
+
 var lastfps = 0;
 var num_collisions = 0;
 var platform_x_movement = 0;
@@ -132,17 +137,20 @@ creditNameJason.src    =    "./Images/JasonUltraKra.png";
 creditNameJesse.src    =    "./Images/JesseKrize.png";
 
 char_right_jump.src = 		"./Images/cellman_jumping.png";
-char_left_jump.src = 		"./Images/bucky_left_jump.gif";
 char_right.src = 			"./Images/cellman_running.png";
 char_right_top.src = 		"./Images/cellman_running_top.png";
-char_left.src = 			"./Images/bucky_left.gif";
 char_right_second.src = 	"./Images/cellman_running2.png";
 char_right_top2.src = 		"./Images/cellman_running_top2.png";
-char_left_second.src = 		"./Images/bucky_left_second.gif";
+
 char_attack.src = 			"./Images/cellman_smashing.png";
 char_attack_top.src = 		"./Images/cellman_smashing_top.png";
+
 background.src = 			"./Images/test_background1.jpg";
 startScreen.src = 			"./Images/start_screen.fw.png";
+
+//char_left_second.src = 		"./Images/bucky_left_second.gif";
+//char_left.src = 			"./Images/bucky_left.gif";
+//char_left_jump.src = 		"./Images/bucky_left_jump.gif";
 
 optionsScreen.src = 		"./Images/options_screen.fw.png";
 background2.src = 			"./Images/test_background2.png";
@@ -152,6 +160,8 @@ background2.src = 			"./Images/test_background2.png";
 	// it reverts back to setTimeout
 
 (function() {
+
+
     var lastTime = 0;
     //var vendors = ['ms', 'moz', 'webkit', 'o'];
     var vendors = ['pie'];
@@ -178,14 +188,87 @@ background2.src = 			"./Images/test_background2.png";
 }())
 
 	////////////////////////////////////////////////////////////////////////////////////////// SETTING THINGS UP INITIALLY
-function begin_game(level) {
 
+function loadGame(){
+collectable_count = 0;
+collectable = new Array();
+punchwall = new Array();
+lastfps = 0;
+platform_x_movement = 0;
+platforms = new Array();
+platform_update = 0;
+grav_const = 1;
+ControllerUse = false;
+CurrPlayer.init();
+console.log("CURRENT LEVEL" + currentLevel)
+	
+map = maps[currentLevel];
+
+imageMap = new Array(map.length);
+
+	for(i = 0; i<map.length; i++){
+		imageMap[i] = new Array(map[0].length);
+	}
+
+	for(var i = 0; i<map.length; i++){
+		for(var k = 0; k<map[i].length; k++){
+
+
+				if(map[i][k]==1){
+					imageMap[i][k] = Ground.image;
+				}
+				// handle blue platforms
+				if(map[i][k]==2){
+					imageMap[i][k] = Jump.image;
+				}
+				if(map[i][k]==3){
+					imageMap[i][k] = Duck.image;
+				}
+				// handle spikes and their tiling
+				//if(map[i][k]==4){
+				//	imageMap[i][k] = Smash.image;
+				//}
+				if(map[i][k]==5){
+					imageMap[i][k] = Switch.image;
+				}
+			
+		if(imageMap[i][k] == undefined) imageMap[i][k] = null;
+		}
+	}
 
 Controller = new Control();
 
 
+
+	// SEND COLLECTABLES TO AN ARRAY FROM MAP FILE
+	for(var i = 0; i<map.length; i++){
+		for(var k = 0; k<map[i].length; k++){
+			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4){
+				platforms.push(new Platform(k*blocksize, i*blocksize, map[i][k]));
+				platforms[platforms.length-1].type = map[i][k];
+			}
+			if(map[i][k]==6){
+				collectable.push(new Item(k*blocksize, i*blocksize));
+			}
+			if(map[i][k]==4){
+				punchwall.push(new PunchWall(k*blocksize, i*blocksize));
+			}
+		}
+	}
+}
+
+//Sets up a game.
+function begin_game() {
+Controller = new Control();
+map = maps[currentLevel];
+
 map = maps[level]
 
+
+if (!gamepad.init()) {
+    gamepadSupport = false;
+}
+else{
 
 gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
     // a new gamepad connected
@@ -269,10 +352,6 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 			Controller.r = false;
 		}
 
-
-
-
-
 		if(gamepads[0].state['START'] && !pauseToggle){
 			ControllerUse = true;
 			Controller.p = !Controller.p;
@@ -281,30 +360,10 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 		if(!gamepads[0].state['START']){
 			pauseToggle = false;
 		}
-
-
 	}
-
-
-
 });
 
-
-
-
-
-
-
-
-
-if (!gamepad.init()) {
-    gamepadSupport = false;
 }
-else{
-	//console.log(gamepad);
-}
-
-
 
 
 
@@ -323,38 +382,29 @@ else{
 	PlayerGame.clearColor = "rgb(135,206,235)";
 	CurrPlayer = new Player(50, 400);				// (x-position, y-position)
 
+	Ground = new Platform();					// 1 = ground
+	Ground.image = new Image();
+	Ground.image.src = "./Images/platform.fw.png";
 
+	Jump = new Platform();						// 2 = jump
+	Jump.image = new Image();
+	Jump.image.src = "./Images/jump.fw.png";
 
+	Duck = new Platform();						// 3 = duck
+	Duck.image = new Image();
+	Duck.image.src = "./Images/duck.fw.png";
 
-		Ground = new Platform();					// 1 = ground
-		Ground.image = new Image();
-		Ground.image.src = "./Images/platform.fw.png";
+	Smash = new Platform();						// 5 = switch
+	Smash.image = new Image();
+	Smash.image.src = "./Images/smash.fw.png";
 
-		Jump = new Platform();						// 2 = jump
-		Jump.image = new Image();
-		Jump.image.src = "./Images/jump.fw.png";
+	Switch = new Platform();					// 4 = smash
+	Switch.image = new Image();
+	Switch.image.src = "./Images/switch.fw.png";
 
-		Duck = new Platform();						// 3 = duck
-		Duck.image = new Image();
-		Duck.image.src = "./Images/duck.fw.png";
-
-		Smash = new Platform();						// 5 = switch
-		Smash.image = new Image();
-		Smash.image.src = "./Images/smash.fw.png";
-
-		Switch = new Platform();					// 4 = smash
-		Switch.image = new Image();
-		Switch.image.src = "./Images/switch.fw.png";
-
-		Blood  = new Platform();					// 6 = collectable
-		Blood.image  = new Image();
-		Blood.image.src = "./Images/redbloodcell.png";
-
-
-
-
-
-
+	Blood  = new Platform();					// 6 = collectable
+	Blood.image  = new Image();
+	Blood.image.src = "./Images/redbloodcell.png";
 
 	Grass = new Platform();
 	Grass.image = new Image();
@@ -401,54 +451,9 @@ else{
 	Button_Credits_MainMenu = new Button(550, 550, 100, 30, "Menu", ctx, false, "#000000");
 
 
-	imageMap = new Array(map.length);
-
-	for(i = 0; i<map.length; i++){
-		imageMap[i] = new Array(map[0].length);
-	}
-
-	
-
-	for(var i = 0; i<map.length; i++){
-		for(var k = 0; k<map[i].length; k++){
+	loadGame();
 
 
-				if(map[i][k]==1){
-					imageMap[i][k] = Ground.image;
-				}
-				// handle blue platforms
-				if(map[i][k]==2){
-					imageMap[i][k] = Jump.image;
-				}
-				if(map[i][k]==3){
-					imageMap[i][k] = Duck.image;/////////////
-				}
-				// handle spikes and their tiling
-				//if(map[i][k]==4){
-				//	imageMap[i][k] = Smash.image;
-				//}
-				if(map[i][k]==5){
-					imageMap[i][k] = Switch.image;//////////////
-				}
-			
-		if(imageMap[i][k] == undefined) imageMap[i][k] = null;
-		}
-	}
 
-	////////////////////////////////////////////////////////////////////////////////////////// SEND COLLECTABLES TO AN ARRAY FROM MAP FILE
-	for(var i = 0; i<map.length; i++){
-		for(var k = 0; k<map[i].length; k++){
-			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4){
-				platforms.push(new Platform(k*blocksize, i*blocksize, map[i][k]));
-				platforms[platforms.length-1].type = map[i][k];
-			}
-			if(map[i][k]==6){
-				collectable.push(new Item(k*blocksize, i*blocksize));
-			}
-			if(map[i][k]==4){
-				punchwall.push(new PunchWall(k*blocksize, i*blocksize));
-			}
-		}
-	}
 	frame();
 }

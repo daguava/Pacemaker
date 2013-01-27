@@ -1,5 +1,6 @@
 
-////////////////////////////////////////////////////////////////////////////////////////// COLLECTABLES CLASS
+
+
 function Item(x, y) {
 	this.x = x;
 	this.y = y;
@@ -31,6 +32,8 @@ function Platform(x, y, type) {
 
 function Player(x_pos, y_pos) {
 
+
+	this.init = function(){
 	this.x = x_pos;
 	this.last_x = 0;
 	this.y = y_pos;
@@ -57,16 +60,15 @@ function Player(x_pos, y_pos) {
 
 	this.update = update;	// when this.update is called, perform the update() function
 	this.detect_collision_platform = detect_collision_platform;
+	}
 
+	this.init();
 
-	////////////////////////////////////////////////////////////////////////////////////////// Player's update function
+	//Player's update function
 	function update(){
-
 		this.last_x = this.x;
 		this.y_dir = 0;
 		this.x_dir = 0;
-
-		
 
 		// Perform death animation
 		if(this.dead && !this.deathAnimToggle){
@@ -125,8 +127,6 @@ function Player(x_pos, y_pos) {
 				attack_occurring = true;
 			}
 
-//I Like Turtles
-
 			if(attack_occurring){
 				attack_timer += 3 *  fpsControl;
 			}
@@ -150,11 +150,9 @@ function Player(x_pos, y_pos) {
 				PlayerGame.resetGame();
 			}
 
-
 			if(Controller.space && PlayerGame.state == GAMESTATE_START){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
 			}
-
 
 			// if neither left nor right is pressed, set direction and speed to zero to prevent movement
 			if(!Controller.left && !Controller.right){
@@ -190,7 +188,6 @@ function Player(x_pos, y_pos) {
 		else{
 			this.y += new_y_speed * fpsControl;
 		}
-
 
 		// if we've moved too far from the left edge, scroll screen instead of character
 		if(this.x >= 250 && this.x_dir == 1){
@@ -270,12 +267,11 @@ function Player(x_pos, y_pos) {
 			}
 		}
 
-			/////////////////////////////////////////////////////////////////////////// DETERMINE IF TO TOGGLE SPRITE (FOR WALKING ANIMATION)
+		//DETERMINE IF TO TOGGLE SPRITE (FOR WALKING ANIMATION)
 		if(this.distance_since_sprite_change >= 20){
 			this.walk_switch = !this.walk_switch;
 			this.distance_since_sprite_change = 0;
 		}
-
 
 		var jumping_threshold = 1.2;
 
@@ -324,7 +320,7 @@ function Player(x_pos, y_pos) {
 		}
 	}
 
-		////////////////////////////////////////////////////////////////////////////////////////// COLLISION WITH PLATFORMS
+	//COLLISION WITH PLATFORMS
 	function detect_collision_platform(){
 		this.grounded_last_frame = this.grounded;
 		this.grounded = false;

@@ -6,7 +6,12 @@ function page_load() {
 	else if (document.addEventListener) //WC3 browsers
 		document.addEventListener(mousewheelevt, function(e) {mouse_scroll(e)}, false);
 	
-	begin_game(1);	// Begin the game
+
+	canvas = document.getElementById("draw_canvas");
+	ctx = canvas.getContext("2d");
+
+	begin_game();	// Begin the game
+
 }
 
 function mouse_scroll(event) {

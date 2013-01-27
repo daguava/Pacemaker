@@ -1,6 +1,5 @@
-
 function draw_game() {
-	ctx = canvas.getContext("2d");
+	
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width-background.width), 0);
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width), 0);
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width+background.width), 0);
@@ -10,59 +9,50 @@ function draw_game() {
 	ctx.drawImage(background2, Math.round(platform_x_movement*(0.8)%background.width+background.width), 0);
 
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH INDIVIDUAL TILE WHERE IT GOES
-		for(var i = 0; i<map.length; i++){
+		for(var i = 0; i < map.length; i++){
 			for(var k = 0; k<map[i].length; k++){
 				if(imageMap[i][k] != null) ctx.drawImage(imageMap[i][k], k*blocksize+Math.floor(platform_x_movement), Math.floor(i*blocksize), blocksize, blocksize);
 			}
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH COLLECTABLE
-		for(var i = 0; i<collectable.length; i++){
+		for(var i = 0; i < collectable.length; i++){
 			// handle collectables
 			if(!collectable[i].hidden){
 				ctx.drawImage(Cell.image, collectable[i].x+Math.floor(platform_x_movement), Math.floor(collectable[i].y));
 			}
 		}
 
-		for(var i = 0; i<punchwall.length; i++){
+		for(var i = 0; i < punchwall.length; i++){
 			// handle collectables
 			if(!punchwall[i].hidden){
 				ctx.drawImage(Smash.image, punchwall[i].x+Math.floor(platform_x_movement), Math.floor(punchwall[i].y));
 			}
 		}
 	
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW DAT BUCKY
+//DRAW DAT BUCKY
 	drawObject(CurrPlayer, ctx);
 
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW UI
+// DRAW UI
 	drawUI(ctx);
 
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW BUTTON
 
-	//**************************************************************************************************** Buttons
-	if(Button_Gameplay_Reset.update()){
-		PlayerGame.state = GAMESTATE_GAMEPLAY
-		PlayerGame.resetGame();
-	}
+//DRAW SEXY GRID
 
-	if(Button_Gameplay_Options.update()){
-		PlayerGame.state = GAMESTATE_OPTIONS;
-	}
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW SEXY GRID
 	if(grid){
 		blocksWidth = map[0].length;
 		blocksHeight = map.length;
-		for(var i = 0; i*blocksize<=blocksWidth*blocksize; i++){
+		for(var i = 0; i * blocksize <= blocksWidth*blocksize; i++){
 			ctx.stokeStyle = "rgb(0,0,0)";
 			ctx.beginPath();
-			ctx.moveTo(0,i*blocksize);
+			ctx.moveTo(0,i * blocksize);
 			ctx.lineTo(blocksWidth*blocksize,i*blocksize);
 			ctx.stroke();
 
 			ctx.stokeStyle = "rgb(0,0,0)";
 			ctx.beginPath();
-			ctx.moveTo(i*blocksize+platform_x_movement%blocksize,0);
-			ctx.lineTo(i*blocksize+platform_x_movement%blocksize,blocksHeight*blocksize);
+			ctx.moveTo(i * blocksize + platform_x_movement % blocksize,0);
+			ctx.lineTo(i * blocksize + platform_x_movement % blocksize,blocksHeight * blocksize);
 			ctx.stroke();
 
 			ctx.stokeStyle = "rgb(0,0,0)";
@@ -76,7 +66,7 @@ function screenClear(currentGame){
 	return true;
 }
 
-		////////////////////////////////////////////////////////////////////////////////////////// AVOID THIS SHIT
+//AVOID THIS SHIT
 function drawObject(drawableObject, ctx){
 	ctx.save();
 	ctx.translate(drawableObject.x + drawableObject.width/2 ,drawableObject.y + drawableObject.height/2);
@@ -88,8 +78,10 @@ function drawObject(drawableObject, ctx){
 }
 
 
-	////////////////////////////////////////////////////////////////////////////////////////// UP DRAWN TO SCREEN
+
+//UP DRAWN TO SCREEN
 function drawUI(context){
+
 
 	var canvas = document.getElementById("draw_canvas");
 	if(debug) {
@@ -113,7 +105,7 @@ function drawUI(context){
 		context.font = '30px Calibri';
 		context.fillText("You dead bro?",																230,	35);
 	}
-	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ ////////////////////////////Known Bug - can pause while jumped
+	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ //Known Bug - can pause while jumped
 				context.fillStyle = "rgba(50,50,50,0.5)";
 				context.fillRect(527, 247, 145, 50);
 				context.fillStyle = "rgb(240,240,240)";
@@ -122,23 +114,39 @@ function drawUI(context){
 	}
 }
 
-	////////////////////////////////////////////////////////////////////////////////////////// DRAW EVERYTHING
+//DRAW EVERYTHING
 function draw_world() {  
-
-	var canvas = document.getElementById("draw_canvas");
 
 	if (PlayerGame.state == GAMESTATE_GAMEPLAY){
 		draw_game();
-	}else if(PlayerGame.state == GAMESTATE_OPTIONS){
+	
+
+	if(Button_Gameplay_Reset.update()){
+		//screenClear();
+		//PlayerGame.state = GAMESTATE_RESETTING;
+		loadGame();
+		//resetGame();
+	}
+
+	if(Button_Gameplay_Options.update()){
+		//loadGame();
+		PlayerGame.state = GAMESTATE_OPTIONS;
+		//PlayerGame.changeState(GAMESTATE_GAMEPLAY,GAMESTATE_OPTIONS);
+	}
+	}
+
+	else if(PlayerGame.state == GAMESTATE_OPTIONS){
 		ctx.drawImage(optionsScreen, 0, 0);
 		//Button_Options_Start.draw();
 
 		if(Button_Options_Start.update()){
-			PlayerGame.resetGame();              //reset the game so that you don't start a game at your previous progress/death
 			PlayerGame.state = GAMESTATE_START;
 		}
-	}else if(PlayerGame.state == GAMESTATE_START){
+	}
+
+	else if(PlayerGame.state == GAMESTATE_START){
 		ctx.drawImage(startScreen, 0, 0);
+
 		//Button_Start_Options.draw();
 		//Button_Start_Credits.draw();
 		//Button_Start_Play.draw();
@@ -146,12 +154,14 @@ function draw_world() {
 
 
 
+
 		if(Button_Start_Play.update() || Controller.space){
-			PlayerGame.state = GAMESTATE_GAMEPLAY;			
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			loadGame();
 		}	
 		
 		if(Button_Start_Credits.update()){
-			PlayerGame.state = GAMESTATE_CREDITS;	
+			PlayerGame.state = GAMESTATE_CREDITS;
 		}
 		
 		if(Button_Start_Options.update()){
@@ -159,17 +169,20 @@ function draw_world() {
 		}	
 
 
-	}else if(PlayerGame.state == GAMESTATE_CREDITS){
-		ctx.drawImage(creditScreen1, 0, 0);
+<<<<<<< HEAD
+=======
 
+>>>>>>> Beginning to do serious re-org
+	}else if(PlayerGame.state == GAMESTATE_CREDITS){
+
+		ctx.drawImage(creditScreen1, 0, 0);
 
 		LoadMitchell();
 		LoadJason();
 		LoadNick();
 		LoadAlex();
 		LoadJesse();
-		
-		
+	
 		//Permanently display text to the screen
 	    ctx.font           = 'bold 40px Calibri';
 		ctx.fillStyle      = "rgb(0, 0, 0)";
@@ -182,34 +195,20 @@ function draw_world() {
 		ctx.fillText(sJasonA,    600, 450);
 		ctx.fillText(sJesseK,    210, 500);
 
-		
-		
-		
-		
-		Button_Credits_MainMenu.draw();
-
-
-
-
-		if(Button_Credits_MainMenu.clicked()){
+		if(Button_Credits_MainMenu.update()){
 			PlayerGame.state = GAMESTATE_START;
 		}
-		
-		
 	}
-//end function draw_world()
+	else if(PlayerGame.state == GAMESTATE_RESETTING){
+		//console.log("RESETTING");
+		PlayerGame.state = GAMESTATE_GAMEPLAY;
+		loadGame();
+	}
 }
-
-
-
-
-
 
 function LoadMitchell(){
 	
 		var x = String.fromCharCode(iCounter);
-
-
 		//ctx.drawImage(creditNameNick,     50, 250, 200, 100);
 		if(bMitchellL == 0){
 		    //iStringPosition = sMitchellL.length;
@@ -245,11 +244,6 @@ function LoadMitchell(){
 		}
 }
 
-
-
-
-
-
 function LoadJason(){
 	
 		if(bJasonA == 0){
@@ -279,10 +273,6 @@ function LoadJason(){
 			}
 		}
 }
-		
-
-
-
 
 function LoadAlex(){		
 		if(bAlexS == 0){
