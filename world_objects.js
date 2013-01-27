@@ -303,4 +303,3 @@ function Player(x_pos, y_pos) {
 		}
 	}
 }
->>>>>>> cd1edde365be3afd95dbddced2299bd72751c990

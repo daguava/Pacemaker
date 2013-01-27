@@ -153,10 +153,11 @@ function draw_world() {
 //end function draw_world()
 }
 
-
-
-
-
+function screenClear(currentGame){
+	ctx.fillStyle = currentGame.clearColor;
+	ctx.fillRect(0, 0, currentGame.x_boundary, currentGame.y_boundary);
+	return true;
+}
 
 function IntToAscii(iXStartPosition, iYStartPosition){
 	

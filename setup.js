@@ -3,7 +3,6 @@ var GAMESTATE_GAMEPLAY = 1;
 var GAMESTATE_OPTIONS = 2;
 var GAMESTATE_CREDITS = 3;
 
-
 var canvas;
 
 var background = new Image();
@@ -64,16 +63,11 @@ var iStringPositionNick     = 0;
 var iStringPositionJason    = 0;
 var iStringPositionJesse    = 0;
 
-
-
-
 var bJesseK    = 0;
 var bNickH     = 1;
 var bMitchellL = 1;
 var bAlexS     = 1;
 var bJasonA    = 1;
-
-
 
 var iXTextPosition = 50;
 var iYTextPosition = 100;
@@ -85,7 +79,6 @@ var iCounterMax = 126;
 var iArrayPosition = 0;
 
 creditScreen.src =         "./Images/credits_screen.fw.png";
-
 
 char_right_jump.src = 		"./Images/bucky_right_jump.gif";
 char_left_jump.src = 		"./Images/bucky_left_jump.gif";
