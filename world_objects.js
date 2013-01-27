@@ -47,8 +47,6 @@ function Player(x_pos, y_pos) {
 	this.image = new Image();
 	this.width = 100;		// collision width of bucky (so he overlaps things a bit)
 	this.height = 100;		// collision height of bucky (so he overlaps things a bit)
-	this.hit_height = 50;
-	this.hit_width = 50;
 	this.grounded = false;
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
@@ -89,6 +87,7 @@ function Player(x_pos, y_pos) {
 
 		if(!this.dead && !Controller.p){
 
+
 			// lets the player switch gravities as long as they're on the ground
 			if(( (Controller.up && grav_const == 1 ) && this.grounded ) || ((Controller.down && grav_const == -1) && this.grounded)){
 			grav_const *= -1;
@@ -99,6 +98,8 @@ function Player(x_pos, y_pos) {
 				this.jump_hold_toggle = false;
 			}
 			
+
+
 			// set x dir
 			if(Controller.left){
 				this.x_dir = -1;	
@@ -120,17 +121,26 @@ function Player(x_pos, y_pos) {
 				this.jump_hold_toggle = true;	// set jump toggle to disable double jumping
 			}
 
+
+
+
 			// if grounded and attack button is pressed
 			if(Controller.attack && (this.grounded || this.grounded_last_frame) && !attack_occurring){
 				this.attacking = true;
 				attack_occurring = true;
 			}
 
-//I Like Turtles
+
+
+
 
 			if(attack_occurring){
 				attack_timer += 3 *  fpsControl;
 			}
+
+
+
+
 
 			if(attack_timer > 60){
 				this.attacking = false;
@@ -268,25 +278,12 @@ function Player(x_pos, y_pos) {
 
 		// change to facing right image if moving right, or not moving
 		if(this.x_dir == 1 || this.x_dir == 0){
-
 			if(this.walk_switch && this.airtime < jumping_threshold){
-				if(grav_const == 1){
-					this.rotation = 0;
-					this.image = char_right_second;
-				} else {
-					this.rotation = 0;
-					this.image = char_right_top2;	
-				}
-				
+				this.rotation = 0;
+				this.image = char_right_second;
 			} else if (this.airtime < jumping_threshold){
-				if(grav_const == 1){
-					this.image = char_right;
-					this.rotation = 0;
-				} else {
-					this.image = char_right_top;
-					this.rotation = 0;
-				}
-
+				this.image = char_right;
+				this.rotation = 0;
 			} else {
 				this.image = char_right_jump;
 			}
@@ -303,7 +300,7 @@ function Player(x_pos, y_pos) {
 			}
 		}
 		if(this.attacking){
-			this.image = char_attack;
+			this.image = char_right_jump;
 		}
 	}
 
@@ -325,20 +322,15 @@ function Player(x_pos, y_pos) {
 
 		for(var i = 0; i<platforms.length; i++){
 
-			centerPlayerX = this.x + this.width/2;
-			if(grav_const == 1){
-				centerPlayerY = this.y + this.hit_height*1.5;
-			} else {
-				centerPlayerY = this.y + this.hit_height*(2/3);
-			}
-			
+			centerPlayerX = this.x + this.width/2 + 6;
+			centerPlayerY = this.y + this.height/2;
 			centerRectX = platforms[i].x + platforms[i].width/2;
 			centerRectY = platforms[i].y + platforms[i].height/2;
 
 			distanceX = centerPlayerX - centerRectX;
 			distanceY = centerPlayerY - centerRectY;
 			minDistanceX = this.width/2 + platforms[i].width/2;
-			minDistanceY = this.hit_height/2 + platforms[i].height/2;
+			minDistanceY = this.height/2 + platforms[i].height/2;
 
 			if(Math.abs(distanceX) >= minDistanceX || Math.abs(distanceY) >= minDistanceY){
 				depthX = 0;
