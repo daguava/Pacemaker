@@ -131,6 +131,11 @@ function Player(x_pos, y_pos) {
 			this.dead = true;
 		}
 
+		// if r is pressed, reset
+		if(Controller.r){
+
+			PlayerGame.resetGame();
+		}
 
 		if(!this.dead && !Controller.p){
 
@@ -186,12 +191,6 @@ function Player(x_pos, y_pos) {
 				this.x_speed = 10;
 			} else {
 				this.x_speed = 3;
-			}
-
-			// if r is pressed, reset
-			if(Controller.r){
-
-				PlayerGame.resetGame();
 			}
 
 			if(Controller.space && PlayerGame.state == GAMESTATE_START){

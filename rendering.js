@@ -161,6 +161,11 @@ function draw_world() {
 		//Button_Start_Credits.draw();
 		//Button_Start_Play.draw();
 		
+	soundLevel1.mute();
+	soundLevel2.mute();
+	soundLevel3.mute();
+	soundLevel4.mute();
+	soundLevelSanic.mute();
 
 
 
@@ -213,6 +218,17 @@ function draw_world() {
 				currentLevel = 0;
 				loadGame();
 			}
+
+
+
+
+								if(Button_Start_Play.update() || Controller.space){////////////Have this here because I want use ecksbawks
+									
+									PlayerGame.state = GAMESTATE_GAMEPLAY;
+									currentLevel = 1;
+										
+								}	
+
 
 			if(	Button_Level_Select_Two.update()){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;

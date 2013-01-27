@@ -15,6 +15,7 @@ var background2 = new Image();
 
 var collectable_count = 0;
 
+var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 var char_left = new Image();
 var char_left_jump = new Image();
@@ -219,8 +220,16 @@ platforms = new Array();
 platform_update = 0;
 grav_const = 1;
 ControllerUse = false;
+levelcomplete = false;
 CurrPlayer.init();
 console.log("CURRENT LEVEL" + currentLevel)
+
+
+
+
+
+
+
 	
 map = maps[currentLevel];
 

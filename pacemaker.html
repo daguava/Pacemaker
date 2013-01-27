@@ -99,8 +99,14 @@ function frame(){
 	screenClear(PlayerGame);
 
 	//window.requestAnimationFrame(frame);
-	gametimeout = setTimeout(frame, 16);
-	draw_world();
+	if(is_chrome){
+		gametimeout = setTimeout(frame, 16);
+		draw_world();
+	} else {
+		window.requestAnimationFrame(frame);
+		draw_world();
+	}
+	
 
 	// IGNORE FRAME STUFF, it is used for accurate movement / fps counter
 	thisFrameFPS = 1000 / ((now=new Date) - lastUpdate);
