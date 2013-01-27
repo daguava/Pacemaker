@@ -290,7 +290,7 @@ function frame(){
 				}
 			}
 		}
-		document.write(output_string);
+		document.getElementById("output").innerHTML = output_string;
 	}
 	var start = new Date().getTime();
 
@@ -410,8 +410,9 @@ window.addEventListener('mousedown', mouse_down, false);
 	gameCanvas = document.getElementById("draw_canvas");
 	gameCanvas.width = gameWidth;
 	gameCanvas.height = gameHeight;
-mousedown
 </script>
+
+<div id = "output"> </div>
 
 </body>
 </html>
