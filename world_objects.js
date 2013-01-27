@@ -30,6 +30,26 @@ function Platform(x, y, type) {
 	this.height = blocksize;
 }
 
+function LevelData(){
+	this.completed = false;
+	this.unlocked = true;
+	this.best = 0;
+	this.max = 10;
+}
+
+function PlayerData(){
+	this.levels = new Array();
+
+	var lvl1 = new LevelData();
+
+	var lvl2 = new LevelData();
+
+	var lvl3 = new LevelData();
+
+	var lvl4 = new LevelData();
+
+}
+
 function Player(x_pos, y_pos) {
 
 
