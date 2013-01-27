@@ -128,6 +128,9 @@ function draw_world() {
 	var canvas = document.getElementById("draw_canvas");
 
 	if (PlayerGame.state == GAMESTATE_GAMEPLAY){
+
+		soundLevel1.unmute(); //////////////////////Start making sound in the gameplay, added here because fuggit
+
 		draw_game();
 	}else if(PlayerGame.state == GAMESTATE_OPTIONS){
 		ctx.drawImage(optionsScreen, 0, 0);

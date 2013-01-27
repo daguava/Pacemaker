@@ -121,13 +121,21 @@ var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
 
-<<<<<<< HEAD
-var mySound = new buzz.sound("./sounds/BEATA01.wav");
-mySound.load();
+var soundLevel1 = new buzz.sound("./sounds/BEATI01.wav");
+var soundLevel12 = new buzz.sound("./sounds/BEATI01.wav");
 
 
-=======
->>>>>>> Deleted my audio stuff
+var soundLevel2 = new buzz.sound("./sounds/BEATI02.wav");
+var soundLevel3 = new buzz.sound("./sounds/BEATI03.wav");
+var soundLevel4 = new buzz.sound("./sounds/BEATI04.wav");
+var soundLevelSanic = new buzz.sound("./sounds/BEATI05.wav");
+soundLevel1.load();
+soundLevel2.load();
+soundLevel3.load();
+soundLevel4.load();
+soundLevelSanic.load();
+
+
 
 
 creditScreen1.src =         "./Images/credits_screen.fw.png";
