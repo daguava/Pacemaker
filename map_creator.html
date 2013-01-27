@@ -136,13 +136,14 @@ function mouse_press(event) {
 
 function key_event(event) {
 	switch(event.keyCode){
-		case 16:				Controller.shift = true;	break;		// shift
+		case 55: 				Controller.seven = true;	break	 	//7
 		case 54: 				Controller.six = true;		break;		// 6
 		case 53: 				Controller.five = true;		break;		// rightiafohssgoiuseghseiojnvgosjd;hsugfsjfousjbkghsubijfkhviusn.vbgfshfgbvsouifjbzhvouis
 		case 52:				Controller.four = true;		break;		// left
 		case 51:				Controller.three = true; 	break;		// up
 		case 50:				Controller.two = true;		break;		// down
 		case 49:  				Controller.one = true;		break;		// 1
+		case 16: 				Controller.shift = true; break;
 	}
 }
 
@@ -155,6 +156,8 @@ function key_event_up(event) {
 		case 51:				Controller.three = false; 	break;		// up
 		case 50:				Controller.two = false;		break;		// down
 		case 49:  				Controller.one = false;		break;		// 1
+		case 55: 				Controller.seven = false;	break;
+
 	}
 }
 
@@ -273,6 +276,9 @@ function frame(){
     else if(Controller.six){
     	updateBlockChoice(6);
     }
+    else if(Controller.seven){
+    	updateBlockChoice(7);
+    }
 
 
 	if(Controller.shift){
@@ -336,6 +342,10 @@ function draw_world() {
 		Blood  = new Platform();					// 6 = collectable
 		Blood.image  = new Image();
 		Blood.image.src = "./Images/redbloodcell.png";
+
+		EndLevel = new Platform();
+		EndLevel.image = new Image();
+		EndLevel.image.src = "./Images/EndLevelBlock.png"
 		
 
 		// Draws out the map based on the values in the map array.
@@ -358,6 +368,9 @@ function draw_world() {
 				}
 				if(map[i][k]==6){
 					ctx.drawImage(Blood.image, k*50, i*50);
+				}
+				if(map[i][k] ==7){
+					ctx.drawImage(EndLevel.image,k*50,i*50);
 				}
 			}
 		}
