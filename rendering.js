@@ -3,7 +3,7 @@ var time = 0;
 function draw_game() {
 	time+=.1;
 	ctx.save();
-	ctx.translate(0,10);
+	ctx.translate(10,-10);
 	ctx.rotate(Math.sin(time)/45);
 
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width-background.width), 0);
@@ -78,7 +78,7 @@ function drawObject(drawableObject, ctx){
 	ctx.save();
 	ctx.translate(drawableObject.x + drawableObject.width/2 ,drawableObject.y + drawableObject.height/2);
 	//ctx.translate(drawableObject.width/2,drawableObject.height/2)
-	ctx.rotate(drawableObject.rotation) ;
+	ctx.rotate(drawableObject.rotation);
 	ctx.drawImage(drawableObject.image, -drawableObject.width/2, -drawableObject.height/2, drawableObject.width, drawableObject.height);
 	ctx.restore();	
 	return true;
@@ -210,11 +210,29 @@ function draw_world() {
 			ctx.drawImage(levelSelectBgImg,0,0);
 			if(	Button_Level_Select_One.update()){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				PlayerGame.loadGame();
+				currentLevel = 0;
+				loadGame();
 			}
-			Button_Level_Select_Two.update();
-			Button_Level_Select_Three.update();
-			Button_Level_Select_Four.update();
+
+			if(	Button_Level_Select_Two.update()){
+				PlayerGame.state = GAMESTATE_GAMEPLAY;
+				currentLevel = 1;
+				loadGame();
+			}
+
+			if(Button_Level_Select_Three.update()){
+				PlayerGame.state = GAMESTATE_GAMEPLAY;
+				currentLevel = 2;
+				loadGame();
+			}
+
+			if(Button_Level_Select_Four.update()){
+				PlayerGame.state = GAMESTATE_GAMEPLAY;
+				currentLevel = 3;
+				loadGame();
+			}
+
+			
 	}
 	else if(PlayerGame.state == GAMESTATE_RESETTING){
 		//console.log("RESETTING");
