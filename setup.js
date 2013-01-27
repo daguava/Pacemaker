@@ -26,9 +26,10 @@ var collectable = new Array();
 var punchwall = new Array();
 var grav_const = 1;
 var gamepadSupport = true;
+var currentLevel = 0;
 
 var wiper = new Transition();
-console.log(wiper)
+
 
 var attack_occurring = false;
 var attack_timer = 0;
@@ -212,20 +213,12 @@ background2.src = 			"./Images/test_background2.png";
 }())
 
 	////////////////////////////////////////////////////////////////////////////////////////// SETTING THINGS UP INITIALLY
-function begin_game() {
+function begin_game(level) {
 
 
+Controller = new Control();
 
-
-	Controller = new Control();
-
-
-
-
-
-
-
-
+map = maps[level]
 
 gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
     // a new gamepad connected
@@ -340,10 +333,12 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 if (!gamepad.init()) {
     gamepadSupport = false;
 }
+else{
+	//console.log(gamepad);
+}
 
 
 
-console.log(gamepad);
 
 
 
@@ -424,19 +419,19 @@ console.log(gamepad);
 
 	//Syntax for buttons --> What Gamestate it is at _ What Gamestate it is going to
 	//GAMESTATE_START
-	Button_Start_Play = new Button(900, 280, 120, 50, "Play Game", ctx, false, "#000000");
+	Button_Start_Play = new Button(900, 280, 120, 50, "Play", ctx, false, "#000000");
 	Button_Start_Options = new Button(900, 355, 180, 50, "Options", ctx, false, "#000000");
 	Button_Start_Credits = new Button(900, 430, 160, 50, "Credz", ctx, false, "#000000");
 
 	//GAMESTATE_GAMEPLAY
-	Button_Gameplay_Reset = new Button(1000, 10, 120, 30, "Reset Game", ctx, false, "#FFFFFF");
+	Button_Gameplay_Reset = new Button(1000, 10, 120, 30, "Reset", ctx, false, "#FFFFFF");
 	Button_Gameplay_Options = new Button(850, 10, 100, 30, "Options", ctx, false,"#FFFFFF" );
 
 	//GAMESTATE_OPTIONS
-	Button_Options_Start = new Button(550, 500, 100, 30, "Main Menu", ctx, false, "#000000");
+	Button_Options_Start = new Button(550, 500, 100, 30, "Menu", ctx, false, "#000000");
 
 	//GAMESTATE_CREDITS
-	Button_Credits_MainMenu = new Button(550, 550, 100, 30, "Main Menu", ctx, false, "#000000");
+	Button_Credits_MainMenu = new Button(550, 550, 100, 30, "Menu", ctx, false, "#000000");
 
 	imageMap = new Array(map.length);
 

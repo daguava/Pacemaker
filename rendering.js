@@ -38,11 +38,10 @@ function draw_game() {
 	drawUI(ctx);
 
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW BUTTON
-	Button_Gameplay_Reset.draw();
-	Button_Gameplay_Options.draw();
 
 	//**************************************************************************************************** Buttons
 	if(Button_Gameplay_Reset.update()){
+		PlayerGame.state = GAMESTATE_GAMEPLAY
 		PlayerGame.resetGame();
 	}
 
@@ -88,6 +87,40 @@ function drawObject(drawableObject, ctx){
 	return true;
 }
 
+
+	////////////////////////////////////////////////////////////////////////////////////////// UP DRAWN TO SCREEN
+function drawUI(context){
+
+	var canvas = document.getElementById("draw_canvas");
+	if(debug) {
+		// draw debugging UI
+		context.font = '15px Calibri';
+		context.fillStyle = "rgb(240,240,240)";
+		context.fillText("FPS-Avg: " 			+ fps.toFixed(0), 											120, 	20);
+		context.fillText("FPS-Imm: " 			+ thisFrameFPS.toFixed(2), 									120, 	35);
+		context.fillText("Collided: " 			+ CurrPlayer.grounded || CurrPlayer.grounded_last_frame, 	600, 	35);
+		context.fillText("Dist-Since-Change: " 	+ CurrPlayer.distance_since_sprite_change.toFixed(2), 		600, 	20);
+	} else {
+		// draw normal UI
+		context.drawImage(Cell.image, 15, 12);
+		context.font = '25px Calibri';
+		context.fillStyle = "rgb(240,240,240)";
+		context.fillText(" x ", 57, 42);
+		context.fillText("   " + collectable_count, 60, 43);
+	}
+
+	if(CurrPlayer.dead){
+		context.font = '30px Calibri';
+		context.fillText("You dead bro?",																230,	35);
+	}
+	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ ////////////////////////////Known Bug - can pause while jumped
+				context.fillStyle = "rgba(50,50,50,0.5)";
+				context.fillRect(527, 247, 145, 50);
+				context.fillStyle = "rgb(240,240,240)";
+				context.font = '30px Calibri';
+				context.fillText("Paused",																		550,	280);
+	}
+}
 
 	////////////////////////////////////////////////////////////////////////////////////////// DRAW EVERYTHING
 function draw_world() {  

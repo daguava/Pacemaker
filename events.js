@@ -6,7 +6,7 @@ function page_load() {
 	else if (document.addEventListener) //WC3 browsers
 		document.addEventListener(mousewheelevt, function(e) {mouse_scroll(e)}, false);
 	
-	begin_game();	// Begin the game
+	begin_game(1);	// Begin the game
 }
 
 function mouse_scroll(event) {

@@ -1,5 +1,5 @@
 
-	////////////////////////////////////////////////////////////////////////////////////////// COLLECTABLES CLASS
+////////////////////////////////////////////////////////////////////////////////////////// COLLECTABLES CLASS
 function Item(x, y) {
 	this.x = x;
 	this.y = y;
@@ -232,7 +232,7 @@ function Player(x_pos, y_pos) {
 
 		// if you haven't collided increase counter that tracks "air time" by arbitrary .24 amount
 		if(!this.grounded){
-			console.log(this.grounded)
+			//console.log(this.grounded)
 		
 			this.airtime += 0.24*fpsControl;
 			if(this.airtime > 1.5){
