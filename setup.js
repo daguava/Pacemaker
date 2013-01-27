@@ -20,6 +20,8 @@ var y_check;
 var collectable = new Array();
 var grav_const = 1;
 var gamepadSupport = true;
+var wiper = new Transition();
+console.log(wiper)
 
 var debug = true;
 var grid = false;

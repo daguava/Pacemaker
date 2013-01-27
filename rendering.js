@@ -63,7 +63,6 @@ function draw_game() {
 	}
 }
 
-
 function screenClear(currentGame){ 
 	ctx.fillStyle = currentGame.clearColor;
 	ctx.fillRect(0, 0, currentGame.x_boundary, currentGame.y_boundary);
@@ -132,5 +131,6 @@ function draw_world() {
 			PlayerGame.state = GAMESTATE_START;
 		}
 	}
+	wiper.update();
 }
 
