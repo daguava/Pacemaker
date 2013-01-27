@@ -91,8 +91,8 @@ var iStringPositionJesse    = 0;
 var bJesseK    = 1;
 var bNickH     = 1;
 var bMitchellL = 1;
-var bAlexS     = 0;
-var bJasonA    = 0;
+var bAlexS     = 1;
+var bJasonA    = 1;
 
 
 
@@ -398,7 +398,7 @@ console.log(gamepad);
 	Button_Options_Start = new Button(550, 500, 100, 30, "Main Menu", ctx, false, "#000000");
 
 	//GAMESTATE_CREDITS
-	Button_Credits_MainMenu = new Button(500, 500, 100, 30, "Main Menu", ctx, false, "#000000");
+	Button_Credits_MainMenu = new Button(550, 550, 100, 30, "Main Menu", ctx, false, "#000000");
 
 	imageMap = new Array(map.length);
 

@@ -140,22 +140,12 @@ function draw_world() {
 		ctx.strokeStyle    = 'black';
 		ctx.lineWidth      = 10;
 		//Draw permanent names to Credit's canvas
-		if(aMitchellL != null)
-		{
-	        ctx.fillText(sBuildMitchell, 210, 300);
-		}
-		if(aAlexS != null){
-			ctx.fillText(sBuildAlex, 600, 350);
-		}
-		if(aNickH != null){
-			ctx.fillText(sBuildNick, 210, 400);
-		}
-		if(aJasonA != null){
-			ctx.fillText(sBuildJason, 600, 450);
-		}
-		if(aJesseK != null){
-			ctx.fillText(sBuildJesse, 210, 500);
-		}
+	    ctx.fillText(sMitchellL, 210, 300);
+		ctx.fillText(sAlexS,     600, 350);
+		ctx.fillText(sNickH,     210, 400);
+		ctx.fillText(sJasonA,    600, 450);
+		ctx.fillText(sJesseK,    210, 500);
+
 		
 		
 		
