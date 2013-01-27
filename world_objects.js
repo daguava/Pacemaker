@@ -129,6 +129,12 @@ function Player(x_pos, y_pos) {
 
 		// if r is pressed, reset
 		if(Controller.r){
+		soundLevel1.loop().play().mute();
+		soundLevel2.loop().play().mute();
+		soundLevel3.loop().play().mute();
+		soundLevel4.loop().play().mute();
+		soundLevelSanic.loop().play().mute();
+
 
 			PlayerGame.resetGame();
 		}
