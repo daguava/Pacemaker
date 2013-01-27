@@ -16,7 +16,7 @@ function draw_game() {
 
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH INDIVIDUAL TILE WHERE IT GOES
 		for(var i = 0; i < map.length; i++){
-			for(var k = 0; k<map[i].length; k++){
+			for(var k = 0; k*blocksize+platform_x_movement < 1400 && k<map[i].length; k++){
 				if(imageMap[i][k] != null && k*blocksize+platform_x_movement >= -100 && (k+1)*blocksize + platform_x_movement < 1300) 
 					ctx.drawImage(imageMap[i][k], k*blocksize+Math.floor(platform_x_movement), Math.floor(i*blocksize), blocksize, blocksize);
 			}

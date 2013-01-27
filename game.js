@@ -18,8 +18,8 @@ function Game(ctx, x_boundary, y_boundary, frame_delay){
 
 
 	function resetGame(){
-		if(is_chrome)
-		clearTimeout(gametimeout);/////////////is this affected?
+		//if(is_chrome)
+		//clearTimeout(gametimeout);/////////////is this affected?
 	
 		loadGame();
 	}
