@@ -279,7 +279,7 @@ Controller = new Control();
 	// SEND COLLECTABLES TO AN ARRAY FROM MAP FILE
 	for(var i = 0; i<map.length; i++){
 		for(var k = 0; k<map[i].length; k++){
-			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4){
+			if(map[i][k]!=0 && map[i][k] != 6 && map[i][k] != 4 && map[i][k] != 7){
 				platforms.push(new Platform(k*blocksize, i*blocksize, map[i][k]));
 				platforms[platforms.length-1].type = map[i][k];
 			}

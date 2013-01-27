@@ -17,23 +17,20 @@ function draw_game() {
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH INDIVIDUAL TILE WHERE IT GOES
 		for(var i = 0; i < map.length; i++){
 			for(var k = 0; k<map[i].length; k++){
-				if(imageMap[i][k] != null) ctx.drawImage(imageMap[i][k], k*blocksize+Math.floor(platform_x_movement), Math.floor(i*blocksize), blocksize, blocksize);
+				if(imageMap[i][k] != null && k*blocksize+platform_x_movement >= -100 && (k+1)*blocksize + platform_x_movement < 1300) 
+					ctx.drawImage(imageMap[i][k], k*blocksize+Math.floor(platform_x_movement), Math.floor(i*blocksize), blocksize, blocksize);
 			}
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH COLLECTABLE
 		for(var i = 0; i < collectable.length; i++){
 			// handle collectables
-			if(!collectable[i].hidden){
-				ctx.drawImage(Cell.image, collectable[i].x+Math.floor(platform_x_movement), Math.floor(collectable[i].y));
-			}
+			ctx.drawImage(Cell.image, collectable[i].x+Math.floor(platform_x_movement), Math.floor(collectable[i].y));
 		}
 
 		for(var i = 0; i < punchwall.length; i++){
 			// handle collectables
-			if(!punchwall[i].hidden){
-				ctx.drawImage(Smash.image, punchwall[i].x+Math.floor(platform_x_movement), Math.floor(punchwall[i].y));
-			}
+			ctx.drawImage(Smash.image, punchwall[i].x+Math.floor(platform_x_movement), Math.floor(punchwall[i].y));
 		}
 	
 //DRAW DAT BUCKY

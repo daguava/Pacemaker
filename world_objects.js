@@ -77,7 +77,7 @@ playerData = new PlayerData();
 	this.width = 100;		// collision width of bucky (so he overlaps things a bit)
 	this.height = 100;		// collision height of bucky (so he overlaps things a bit)
 	this.hit_height = 100;
-	this.hit_width = 100;
+	this.hit_width = 80;
 	this.grounded = false;
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
@@ -112,6 +112,9 @@ playerData = new PlayerData();
 			levelcomplete = true;
 		}
 
+		if(this.x-platform_x_movement >= EndOfMap + 1000){
+			this.x =  EndOfMap + 1000 + platform_x_movement;
+		}
 
 
 		this.last_x = this.x;
@@ -469,7 +472,7 @@ playerData = new PlayerData();
 
 		for(var i = 0; i<platforms.length; i++){
 
-			centerPlayerX = this.x + this.hit_width/2;
+			centerPlayerX = this.x + this.hit_width/2+10;
 			if(grav_const == 1){
 				centerPlayerY = this.y + this.hit_height/2;
 			} else {
@@ -481,7 +484,7 @@ playerData = new PlayerData();
 
 			distanceX = centerPlayerX - centerRectX;
 			distanceY = centerPlayerY - centerRectY;
-			minDistanceX = this.width/2 + platforms[i].width/2;
+			minDistanceX = this.hit_width/2 + platforms[i].width/2;
 			minDistanceY = this.hit_height/2 + platforms[i].height/2;
 
 			if(Math.abs(distanceX) >= minDistanceX || Math.abs(distanceY) >= minDistanceY){
