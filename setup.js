@@ -118,7 +118,7 @@ var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
 
-
+/*
 
 //audio stuff
 var channelmax = 10;
@@ -153,7 +153,7 @@ function playsinglesound(){
 
 playsinglesound();
 
-
+*/
 
 
 
