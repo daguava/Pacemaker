@@ -2,7 +2,7 @@
 <head>
 
 
-
+<link rel = "stylesheet" href = "style.css"> </link>
 
 <script type = "text/javascript" src = "./TweenLite.min.js"> </script>
 <script type = "text/javascript" src="./pacemaker_map.js"></script>
@@ -138,7 +138,7 @@ window.onblur = onBlur;
 </script> 
 </head>
 <body style="overflow: hidden;"  onload="page_load()">
-
+<div id = "root"> 
 <canvas onmousemove="mouse_move(event)" onmousedown="mouse_press(event)" id="draw_canvas" width="1200" height="600" tabindex="1"></canvas>
 
 <div id="fps" style="width: 50px;"></div><div id="ms" style="display: hidden;"></div>
@@ -148,6 +148,7 @@ window.onblur = onBlur;
   	document.getElementById("draw_canvas").focus();
 </script>
 
+</div>
 </body>
 </html>
 
