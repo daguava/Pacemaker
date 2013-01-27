@@ -77,6 +77,8 @@ function Player(x_pos, y_pos) {
 	this.walk_switch = false;
 	this.rotation  = 0;
 	this.attacking = false;
+	this.x_correct_this_frame = false;
+	this.x_correct_count = 0;
 
 	this.update = update;	// when this.update is called, perform the update() function
 	this.detect_collision_platform = detect_collision_platform;
@@ -394,6 +396,8 @@ function Player(x_pos, y_pos) {
 		var depthX = 0;
 		var depthY = 0;
 
+		this.x_correct_this_frame = false;
+
 		for(var i = 0; i<platforms.length; i++){
 
 			centerPlayerX = this.x + this.hit_width/2;
@@ -440,7 +444,23 @@ function Player(x_pos, y_pos) {
 			} else { // resolve x first if the first statement was false
 				this.x += depthX;
 				this.x_speed = 0;
+				if(depthX < 0){
+					this.x_correct_this_frame = true;
+					console.log("Happened");
+					
+				}
+				if(!this.x_correct_this_frame && this.x_correct_count > 1){
+					this.x_correct_count = 0;
+					console.log("Happened as well");
+				}
 			}
+		}
+
+		if(this.x_correct_this_frame){
+			this.x_correct_count++;
+		}
+		if(this.x_correct_count > 1){
+			this.dead = true;
 		}
 	}
 }
