@@ -4,7 +4,7 @@ function draw_game() {
 	time+=.1;
 	ctx.save();
 	ctx.translate(0,10);
-	ctx.rotate(Math.sin(time)/30);
+	ctx.rotate(Math.sin(time)/45);
 
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width-background.width), 0);
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width), 0);
@@ -166,8 +166,9 @@ function draw_world() {
 
 
 		if(Button_Start_Play.update() || Controller.space){
-			PlayerGame.state = GAMESTATE_GAMEPLAY;
-			loadGame();
+			//PlayerGame.state = GAMESTATE_GAMEPLAY;
+			PlayerGame.state = GAMESTATE_LEVEL_SELECT;
+			//loadGame();
 		}	
 		
 		if(Button_Start_Credits.update()){
@@ -204,6 +205,16 @@ function draw_world() {
 		if(Button_Credits_MainMenu.update()){
 			PlayerGame.state = GAMESTATE_START;
 		}
+	}
+	else if(PlayerGame.state == GAMESTATE_LEVEL_SELECT){
+			ctx.drawImage(levelSelectBgImg,0,0);
+			if(	Button_Level_Select_One.update()){
+				PlayerGame.state = GAMESTATE_GAMEPLAY;
+				PlayerGame.loadGame();
+			}
+			Button_Level_Select_Two.update();
+			Button_Level_Select_Three.update();
+			Button_Level_Select_Four.update();
 	}
 	else if(PlayerGame.state == GAMESTATE_RESETTING){
 		//console.log("RESETTING");

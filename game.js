@@ -3,7 +3,7 @@ var GAMESTATE_START = 0;
 var GAMESTATE_GAMEPLAY = 1;
 var GAMESTATE_OPTIONS = 2;
 var GAMESTATE_CREDITS = 3;
-var GAMESTATE_RESETTING = 4;
+var GAMESTATE_LEVEL_SELECT = 4;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////// GAME CLASS

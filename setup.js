@@ -61,6 +61,7 @@ var optionsScreen = new Image();
 
 var gamepad = new Gamepad();
 
+var levelSelectBgImg = new Image();
 var creditScreen1      = new Image();
 var creditNameAlex     = new Image();
 var creditNameNick     = new Image();
@@ -146,6 +147,8 @@ soundLevelSanic.load();
 
 
 creditScreen1.src =         "./Images/credits_screen.fw.png";
+
+levelSelectBgImg.src = "./Images/state_level_select_bg.png";
 
 creditNameAlex.src     =    "./Images/AlexSohailey.png";
 creditNameNick.src     =    "./Images/NickHizzle.png";
@@ -461,6 +464,12 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 	//GAMESTATE_GAMEPLAY
 	Button_Gameplay_Reset = new Button(1000, 10, 120, 30, "Reset", ctx, false, "#FFFFFF");
 	Button_Gameplay_Options = new Button(850, 10, 100, 30, "Options", ctx, false,"#FFFFFF" );
+
+	Button_Level_Select_One = new Button(280,270,550,60,"Lvl1 - Best: 0/26", ctx, true, "#000000");
+	Button_Level_Select_Two = new Button(280,340,550,60,"Locked", ctx, true, "#000000");
+	Button_Level_Select_Three = new Button(280,410,550,60,"Locked", ctx, true, "#000000");
+	Button_Level_Select_Four = new Button(280,480,550,60,"Locked", ctx, true, "#000000");
+
 
 	//GAMESTATE_OPTIONS
 	Button_Options_Start = new Button(550, 500, 100, 30, "Menu", ctx, false, "#000000");
