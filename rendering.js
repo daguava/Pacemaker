@@ -169,10 +169,6 @@ function draw_world() {
 		}	
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> Beginning to do serious re-org
 	}else if(PlayerGame.state == GAMESTATE_CREDITS){
 
 		ctx.drawImage(creditScreen1, 0, 0);
