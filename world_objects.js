@@ -167,7 +167,7 @@ function Player(x_pos, y_pos) {
 			// WE CAN REMOVE THE CODE ABOE INCREMENTALLY AS WE WANT TO CLEAN STUFF UP
 			
 			if(!debug){
-				this.x_speed = 10;
+				this.x_speed = 13;
 				this.x_dir = 1;
 			}
 			
@@ -194,7 +194,7 @@ function Player(x_pos, y_pos) {
 
 
 		// if we've moved too far from the left edge, scroll screen instead of character
-		if(this.x >= 350 && this.x_dir == 1){
+		if(this.x >= 250 && this.x_dir == 1){
 			// move platforms
 			platform_x_movement -= this.x_dir * this.x_speed*fpsControl;
 			platform_update = -1 * this.x_dir * this.x_speed*fpsControl;
