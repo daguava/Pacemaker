@@ -71,9 +71,9 @@ function draw_game() {
 
 
 	  playerData.levels[currentLevel].best = collectable_count;
-	  playerData.levels[currentLevel].beaten = true;
+	  playerData.levels[currentLevel].beaten = true; 
 
-	  if(Controller.enter == true){
+	  if(Controller.attack){
 	 	PlayerGame.state = GAMESTATE_LEVEL_SELECT;
 	  }
 
