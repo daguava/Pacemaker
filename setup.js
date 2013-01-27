@@ -471,12 +471,12 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 	//Syntax for buttons --> What Gamestate it is at _ What Gamestate it is going to
 	//GAMESTATE_START
 	Button_Start_Play = new Button(900, 280, 120, 50, "Play", ctx, false, "#000000");
-	Button_Start_Options = new Button(900, 355, 180, 50, "Controls", ctx, false, "#000000");
+	Button_Start_Options = new Button(900, 355, 180, 50, "Options", ctx, false, "#000000");
 	Button_Start_Credits = new Button(900, 430, 160, 50, "Credz", ctx, false, "#000000");
 
 	//GAMESTATE_GAMEPLAY
 	Button_Gameplay_Reset = new Button(1000, 10, 120, 30, "Reset", ctx, false, "#FFFFFF");
-	Button_Gameplay_Options = new Button(850, 10, 100, 30, "Options", ctx, false,"#FFFFFF" );
+	Button_Gameplay_Options = new Button(850, 10, 100, 30, "Controls", ctx, false,"#FFFFFF" );
 
 	Button_Level_Select_One = new Button(280,270,550,60,"Lvl1 - Best: 0/26", ctx, true, "#000000");
 	Button_Level_Select_Two = new Button(280,340,550,60,"Locked", ctx, true, "#000000");

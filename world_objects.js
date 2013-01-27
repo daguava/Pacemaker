@@ -77,6 +77,8 @@ function Player(x_pos, y_pos) {
 	this.walk_switch = false;
 	this.rotation  = 0;
 	this.attacking = false;
+	this.x_correct_this_frame = false;
+	this.x_correct_count = 0;
 
 	this.update = update;	// when this.update is called, perform the update() function
 	this.detect_collision_platform = detect_collision_platform;
@@ -86,12 +88,6 @@ function Player(x_pos, y_pos) {
 
 
 		soundLevel1.loop().play().mute();
-		
-		/*
-		if(soundLevel1.getPercent(49)){
-		soundLevel12.loop().play().mute();
-		}*/
-
 		soundLevel2.loop().play().mute();
 		soundLevel3.loop().play().mute();
 		soundLevel4.loop().play().mute();
@@ -133,6 +129,12 @@ function Player(x_pos, y_pos) {
 
 		// if r is pressed, reset
 		if(Controller.r){
+		soundLevel1.loop().play().mute();
+		soundLevel2.loop().play().mute();
+		soundLevel3.loop().play().mute();
+		soundLevel4.loop().play().mute();
+		soundLevelSanic.loop().play().mute();
+
 
 			PlayerGame.resetGame();
 		}
@@ -298,17 +300,78 @@ function Player(x_pos, y_pos) {
 		}
 
 
+		if(collectable_count == 0){
+			soundLevel1.setVolume(20)
+		}
+		if(collectable_count == 2){
+				soundLevel1.setVolume(40)
+		}
+		if(collectable_count == 4){
+				soundLevel1.setVolume(60)
+		}
+		if(collectable_count == 6){
+		soundLevel1.setVolume(80)
+		}
+
+
 		if(collectable_count == 8){ ////// Hard code to 8 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel2.unmute();
+				soundLevel2.setVolume(20)
 		}
+		if(collectable_count == 10){
+				soundLevel2.setVolume(40)
+		}
+		if(collectable_count == 12){
+				soundLevel2.setVolume(60)
+		}
+		if(collectable_count == 14){
+		soundLevel2.setVolume(80)
+		}
+
+
 		if(collectable_count == 16){ ////// Hard code to 16 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel3.unmute();
+				soundLevel3.setVolume(20)
 		}
+		if(collectable_count == 18){
+				soundLevel3.setVolume(40)
+		}
+		if(collectable_count == 20){
+				soundLevel3.setVolume(60)
+		}
+		if(collectable_count == 22){
+		soundLevel3.setVolume(80)
+		}
+
+
+
 		if(collectable_count == 24){ ////// Hard code to 24 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel4.unmute();
+				soundLevel4.setVolume(20)
 		}
+		if(collectable_count == 26){
+				soundLevel4.setVolume(40)
+		}
+		if(collectable_count == 28){
+				soundLevel4.setVolume(60)
+		}
+		if(collectable_count == 30){
+		soundLevel4.setVolume(80)
+		}
+
+
 		if(collectable_count == 32){ ////// Hard code to 32 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevelSanic.unmute();
+				soundLevelSanic.setVolume(20)
+		}
+		if(collectable_count == 34){
+				soundLevelSanic.setVolume(40)
+		}
+		if(collectable_count == 36){
+				soundLevelSanic.setVolume(60)
+		}
+		if(collectable_count == 38){
+		soundLevelSanic.setVolume(80)
 		}
 
 
@@ -394,6 +457,8 @@ function Player(x_pos, y_pos) {
 		var depthX = 0;
 		var depthY = 0;
 
+		this.x_correct_this_frame = false;
+
 		for(var i = 0; i<platforms.length; i++){
 
 			centerPlayerX = this.x + this.hit_width/2;
@@ -440,7 +505,23 @@ function Player(x_pos, y_pos) {
 			} else { // resolve x first if the first statement was false
 				this.x += depthX;
 				this.x_speed = 0;
+				if(depthX < 0){
+					this.x_correct_this_frame = true;
+					console.log("Happened");
+					
+				}
+				if(!this.x_correct_this_frame && this.x_correct_count > 1){
+					this.x_correct_count = 0;
+					console.log("Happened as well");
+				}
 			}
+		}
+
+		if(this.x_correct_this_frame){
+			this.x_correct_count++;
+		}
+		if(this.x_correct_count > 1){
+			this.dead = true;
 		}
 	}
 }

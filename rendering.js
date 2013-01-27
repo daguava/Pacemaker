@@ -241,7 +241,6 @@ function draw_world() {
 										
 			}	
 
-
 			if(	Button_Level_Select_Two.update()){
 				PlayerGame.state = GAMESTATE_GAMEPLAY;
 				currentLevel = 1;
