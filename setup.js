@@ -273,7 +273,7 @@ Controller = new Control();
 }
 
 //Sets up a game.
-function begin_game() {
+function begin_game(){
 Controller = new Control();
 map = maps[currentLevel];
 
@@ -281,8 +281,7 @@ map = maps[currentLevel];
 
 if (!gamepad.init()) {
     gamepadSupport = false;
-}
-else{
+}else{
 
 gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
     // a new gamepad connected
@@ -466,8 +465,5 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 
 
 	loadGame();
-
-
-
 	frame();
 }

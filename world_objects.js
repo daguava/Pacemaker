@@ -264,6 +264,7 @@ function Player(x_pos, y_pos) {
 			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
 				collectable_count++;
+
 				collectable.splice(i, 1);
 			}
 		}
