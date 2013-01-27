@@ -41,10 +41,13 @@ function PlayerData(){
 	this.levels = new Array();
 
 	var lvl1 = new LevelData();
+	lvl1.max = 42;
 
 	var lvl2 = new LevelData();
 
+
 	var lvl3 = new LevelData();
+	lvl3.max = 51;
 
 	var lvl4 = new LevelData();
 

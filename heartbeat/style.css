@@ -1,8 +1,9 @@
 #root{
 	width:1024px;
-	height:700px;
+	height:720px;
 	margin:0px auto;
 	background-color:#e2e2e2;
+	color:#cccccc;
 }
 
 #canv{
