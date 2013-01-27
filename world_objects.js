@@ -139,7 +139,6 @@ function Player(x_pos, y_pos) {
 
 			// if shift is pressed, go SANIC SPEED
 			if(Controller.shift){
-				mySound.play();
 				this.x_speed = 10;
 			} else {
 				this.x_speed = 3;
@@ -253,6 +252,8 @@ function Player(x_pos, y_pos) {
 			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
 				collectable_count++;
+								mySound.play();
+
 				collectable.splice(i, 1);
 			}
 		}
