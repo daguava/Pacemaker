@@ -310,7 +310,11 @@ function Player(x_pos, y_pos) {
 			}
 		}
 		if(this.attacking){
-			this.image = char_attack;
+			if(grav_const == 1){
+				this.image = char_attack;
+			} else {
+				this.image = char_attack_top;
+			}
 		}
 	}
 

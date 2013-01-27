@@ -18,6 +18,7 @@ var char_right = new Image();
 var char_right_jump = new Image();
 var char_right_second = new Image();
 var char_attack = new Image();
+var char_attack_top = new Image();
 var x_check;
 var y_check;
 var collectable = new Array();
@@ -75,6 +76,7 @@ char_right_second.src = 	"./Images/cellman_running2.png";
 char_right_top2.src = 		"./Images/cellman_running_top2.png";
 char_left_second.src = 		"./Images/bucky_left_second.gif";
 char_attack.src = 			"./Images/cellman_smashing.png";
+char_attack_top.src = 		"./Images/cellman_smashing_top.png";
 background.src = 			"./Images/test_background1.jpg";
 startScreen.src = 			"./Images/start_screen.fw.png";
 
