@@ -34,11 +34,11 @@ function draw_game() {
 	Button_Gameplay_Options.draw();
 
 	//**************************************************************************************************** Buttons
-	if(Button_Gameplay_Reset.clicked()){
+	if(Button_Gameplay_Reset.update()){
 		PlayerGame.resetGame();
 	}
 
-	if(Button_Gameplay_Options.clicked()){
+	if(Button_Gameplay_Options.update()){
 		PlayerGame.state = GAMESTATE_OPTIONS;
 	}
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW SEXY GRID
@@ -91,27 +91,27 @@ function draw_world() {
 		draw_game();
 	}else if(PlayerGame.state == GAMESTATE_OPTIONS){
 		ctx.drawImage(optionsScreen, 0, 0);
-		Button_Options_Start.draw();
+		//Button_Options_Start.draw();
 
-		if(Button_Options_Start.clicked()){
+		if(Button_Options_Start.update()){
 			PlayerGame.resetGame();              //reset the game so that you don't start a game at your previous progress/death
 			PlayerGame.state = GAMESTATE_START;
 		}
 	}else if(PlayerGame.state == GAMESTATE_START){
 		ctx.drawImage(startScreen, 0, 0);
-		Button_Start_Options.draw();
-		Button_Start_Credits.draw();
-		Button_Start_Play.draw();
+		//Button_Start_Options.draw();
+		//Button_Start_Credits.draw();
+		//Button_Start_Play.draw();
 
-		if(Button_Start_Play.clicked()){
+		if(Button_Start_Play.update()){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;			
 		}	
 		
-		if(Button_Start_Credits.clicked()){
+		if(Button_Start_Credits.update()){
 			PlayerGame.state = GAMESTATE_CREDITS;	
 		}
 		
-		if(Button_Start_Options.clicked()){
+		if(Button_Start_Options.update()){
 			PlayerGame.state = GAMESTATE_OPTIONS;			
 		}	
 
@@ -126,10 +126,11 @@ function draw_world() {
         ctx.drawImage(creditNameJason, 350, 100);
         ctx.drawImage(creditNameJesse, 350, 350);
 		
-		Button_Credits_MainMenu.draw();
+		//Button_Credits_MainMenu.draw();
 
-		if(Button_Credits_MainMenu.clicked()){
+		if(Button_Credits_MainMenu.update()){
 			PlayerGame.state = GAMESTATE_START;
 		}
 	}
 }
+>>>>>>> Improved Buttons
