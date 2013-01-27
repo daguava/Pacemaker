@@ -1,5 +1,11 @@
+var time = 0;
+
 function draw_game() {
-	
+	time+=.1;
+	ctx.save();
+	ctx.translate(0,10);
+	ctx.rotate(Math.sin(time)/30);
+
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width-background.width), 0);
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width), 0);
 	ctx.drawImage(background, Math.round(platform_x_movement*(0.5)%background.width+background.width), 0);
@@ -58,6 +64,7 @@ function draw_game() {
 			ctx.stokeStyle = "rgb(0,0,0)";
 		}
 	}
+	ctx.restore();
 }
 
 function screenClear(currentGame){ 

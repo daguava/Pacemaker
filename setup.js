@@ -393,7 +393,7 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 
 	Controller = new Control();
 	PlayerGame = new Game(ctx, gameWidth, gameHeight, 10);		// (context, x_boundary, y_boundary, ms_delay)
-	PlayerGame.clearColor = "rgb(135,206,235)";
+	PlayerGame.clearColor = "rgb(50,43,32)";
 	CurrPlayer = new Player(50, 400);				// (x-position, y-position)
 
 	Ground = new Platform();					// 1 = ground
