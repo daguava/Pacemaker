@@ -1,3 +1,4 @@
+
 	////////////////////////////////////////////////////////////////////////////////////////// COLLECTABLES CLASS
 function Item(x, y) {
 	this.x = x;
@@ -189,7 +190,7 @@ function Player(x_pos, y_pos) {
 			console.log(this.grounded)
 		
 			this.airtime += 0.24*fpsControl;
-			if(this.airtime > 1.1){
+			if(this.airtime > 1.5){
 					this.rotation+=.1
 			}
 		} 
