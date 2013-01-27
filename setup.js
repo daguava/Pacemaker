@@ -1,3 +1,4 @@
+
 var GAMESTATE_START = 0;
 var GAMESTATE_GAMEPLAY = 1;
 var GAMESTATE_OPTIONS = 2;
@@ -58,6 +59,65 @@ var creditNameNick     = new Image();
 var creditNameMitchell = new Image();
 var creditNameJason    = new Image();
 var creditNameJesse    = new Image();
+
+var sMitchellL = "MITCHELL LUTZKE";
+var sAlexS     = "ALEX SOHAIL";
+var sNickH     = "NICK HEINDL";
+var sJasonA    = "JASON ALTEKRUSE";
+var sJesseK    = "JESSE KRIZENESKY";
+
+var sBuildMitchell = "";
+var sBuildAlex     = "";
+var sBuildNick     = ""; 
+var sBuildJason    = "";
+var sBuildJesse    = "";
+
+var aMitchellL = new Array();
+var aAlexS     = new Array();
+var aNickH     = new Array();
+var aJasonA    = new Array();
+var aJesseK    = new Array();
+
+
+//not an array because how would you know array[0] == mitchell's string
+var iStringPositionMitchell = 0;
+var iStringPositionAlex     = 0;
+var iStringPositionNick     = 0;
+var iStringPositionJason    = 0;
+var iStringPositionJesse    = 0;
+
+
+
+
+var bJesseK    = 1;
+var bNickH     = 1;
+var bMitchellL = 1;
+var bAlexS     = 1;
+var bJasonA    = 1;
+
+
+
+var iXTextPositionMitchell = 210;
+var iXTextPositionNick     = 210;
+var iXTextPositionJesse    = 210;
+var iXTextPositionAlex     = 210;
+var iXTextPositionJason    = 210;
+
+//Mitchell Alex and nick work
+var iYTextPositionMitchell = 300;
+var iYTextPositionNick     = 350;
+var iYTextPositionJason    = 450;
+var iYTextPositionAlex     = 400;
+var iYTextPositionJesse    = 500;
+
+
+var iCounter = 33;
+var iCounterMitchell = 0;
+var iCounterMin = 33;
+var iCounterMax = 126;
+var iArrayPosition = 0;
+
+
 
 creditScreen1.src =         "./Images/test_background.jpg";
 
