@@ -53,9 +53,7 @@ function Player(x_pos, y_pos) {
 		this.y_dir = 0;
 		this.x_dir = 0;
 
-		if(( (Controller.up && grav_const == 1 ) && this.grounded ) || ((Controller.down && grav_const == -1) && this.grounded)){
-			grav_const *= -1;
-		}
+		
 
 		// Perform death animation
 		if(this.dead && !this.deathAnimToggle){
@@ -75,6 +73,11 @@ function Player(x_pos, y_pos) {
 
 
 		if(!this.dead && !Controller.p){
+
+			// lets the player switch gravities as long as they're on the ground
+			if(( (Controller.up && grav_const == 1 ) && this.grounded ) || ((Controller.down && grav_const == -1) && this.grounded)){
+			grav_const *= -1;
+			}
 
 			// jump toggle used to prevent double jumps
 			if(!Controller.space){
