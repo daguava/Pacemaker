@@ -145,6 +145,11 @@ function Player(x_pos, y_pos) {
 				this.x_speed = 3;
 			}
 
+			if(Controller.r){
+				resetGame();
+			}
+
+
 			// if neither left nor right is pressed, set direction and speed to zero to prevent movement
 			if(!Controller.left && !Controller.right){
 				this.x_dir = 0;

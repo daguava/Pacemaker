@@ -40,6 +40,10 @@ function key_event(event) {
 			case 38: case 87:		Controller.up = true; 			break;		// up
 			case 40: case 83:		Controller.down = true;			break;		// down
 			case 80:                Controller.p = !Controller.p;   break;      // p - pause
+
+			case 69: 				Controller.e = true;			break;
+			case 82:     			Controller.r = true;			break;
+
 			case 90: 				Controller.attack = true; 		break;		// z - attack
 		}
 	}
@@ -54,6 +58,10 @@ function key_event_up(event) {
 			case 37: case 65:		Controller.left = false;	break;		// left
 			case 38: case 87:		Controller.up = false; 		break;		// up
 			case 40: case 83:		Controller.down = false;	break;		// down
+
+			case 69: 				Controller.e = false;			break;
+			case 82:     			Controller.r = false;			break;
+
 			case 90: 				Controller.attack = false; 	break;		// z - attack
 		}
 	}

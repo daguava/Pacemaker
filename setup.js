@@ -195,6 +195,24 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
 			Controller.attack = false;
 		}
 
+		if(gamepads[0].state['RIGHT_STICK']){
+			ControllerUse = true;
+			Controller.e = true;
+		} else if(gamepadSupport && ControllerUse) {
+			Controller.e = false;
+		}
+
+		if(gamepads[0].state['BACK']){
+			ControllerUse = true;
+			Controller.r = true;
+		} else if(gamepadSupport && ControllerUse) {
+			Controller.r = false;
+		}
+
+
+
+
+
 		if(gamepads[0].state['START'] && !pauseToggle){
 			ControllerUse = true;
 			Controller.p = !Controller.p;
