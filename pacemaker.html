@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+
 <script type = "text/javascript" src = "./TweenLite.min.js"> </script>
 <script type = "text/javascript" src="./pacemaker_map.js"></script>
 <script type = "text/javascript" src="./world_objects.js"></script>
@@ -9,6 +10,7 @@
 <script type = "text/javascript" src="./rendering.js"></script>
 <script type = "text/javascript" src="./transition.js"></script>
 <script type = "text/javascript" src="./setup.js"></script>
+
 <script type = "text/javascript">
 
 var fps = 60, now, lastUpdate = (new Date)*1 - 1, fpsControl = 1, x, y;
@@ -39,6 +41,7 @@ function Control() {
 	this.mouse_x = null;
 	this.mouse_y = null;
 	this.p = false;
+	this.attack = false;
 }
 
 function gamepadConnected(evt)
@@ -85,6 +88,8 @@ function Game(ctx, x_boundary, y_boundary, frame_delay){
 		grav_const = 1;
 		begin_game();
 		clearTimeout(gametimeout);
+
+		ControllerUse = false;
 	}
 }
 

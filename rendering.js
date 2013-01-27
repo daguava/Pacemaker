@@ -22,6 +22,13 @@ function draw_game() {
 				ctx.drawImage(Cell.image, collectable[i].x+Math.floor(platform_x_movement), Math.floor(collectable[i].y));
 			}
 		}
+
+		for(var i = 0; i<punchwall.length; i++){
+			// handle collectables
+			if(!punchwall[i].hidden){
+				ctx.drawImage(Smash.image, punchwall[i].x+Math.floor(platform_x_movement), Math.floor(punchwall[i].y));
+			}
+		}
 	
 		////////////////////////////////////////////////////////////////////////////////////////// DRAW DAT BUCKY
 	drawObject(CurrPlayer, ctx);
