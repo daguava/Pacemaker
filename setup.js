@@ -262,7 +262,6 @@ function begin_game() {
 Controller = new Control();
 map = maps[currentLevel];
 
-map = maps[level]
 
 
 if (!gamepad.init()) {
