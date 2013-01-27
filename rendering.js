@@ -109,7 +109,7 @@ function draw_world() {
 		//Button_Start_Credits.draw();
 		//Button_Start_Play.draw();
 
-		if(Button_Start_Play.update()){
+		if(Button_Start_Play.update() || Controller.space){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;			
 		}	
 		
