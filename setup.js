@@ -12,9 +12,12 @@ var collectable_count = 0;
 var char_left = new Image();
 var char_left_jump = new Image();
 var char_left_second = new Image();
+var char_right_top = new Image();
+var char_right_top2 = new Image();
 var char_right = new Image();
 var char_right_jump = new Image();
 var char_right_second = new Image();
+var char_attack = new Image();
 var x_check;
 var y_check;
 var collectable = new Array();
@@ -56,7 +59,7 @@ var creditNameJason    = new Image();
 var creditNameJesse    = new Image();
 
 creditScreen1.src =         "./Images/test_background.jpg";
-//creditScreen2.src      =    "./Images/"
+
 creditNameAlex.src     =    "./Images/AlexSohailey.png";
 creditNameNick.src     =    "./Images/NickHizzle.png";
 creditNameMitchell.src =    "./Images/MitchDeezy.png";
@@ -66,9 +69,12 @@ creditNameJesse.src    =    "./Images/JesseKrize.png";
 char_right_jump.src = 		"./Images/cellman_jumping.png";
 char_left_jump.src = 		"./Images/bucky_left_jump.gif";
 char_right.src = 			"./Images/cellman_running.png";
+char_right_top.src = 		"./Images/cellman_running_top.png";
 char_left.src = 			"./Images/bucky_left.gif";
 char_right_second.src = 	"./Images/cellman_running2.png";
+char_right_top2.src = 		"./Images/cellman_running_top2.png";
 char_left_second.src = 		"./Images/bucky_left_second.gif";
+char_attack.src = 			"./Images/cellman_smashing.png";
 background.src = 			"./Images/test_background1.jpg";
 startScreen.src = 			"./Images/start_screen.fw.png";
 
