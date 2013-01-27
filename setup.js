@@ -29,7 +29,6 @@ var gamepadSupport = true;
 var currentLevel = 0;
 
 
-
 var wiper = new Transition();
 
 
@@ -121,13 +120,7 @@ var iCounterMax      = 126;
 var iArrayPosition   = 0;
 
 
-<<<<<<< HEAD
-var mySound = new buzz.sound("./sounds/BEATA01.wav");
-mySound.load();
 
-
-=======
->>>>>>> Deleted my audio stuff
 
 
 creditScreen1.src =         "./Images/credits_screen.fw.png";
@@ -190,7 +183,9 @@ function begin_game(level) {
 
 Controller = new Control();
 
-//map = maps[level]
+
+map = maps[level]
+
 
 gamepad.bind(Gamepad.Event.CONNECTED, function(device) {
     // a new gamepad connected
@@ -404,10 +399,6 @@ else{
 
 	//GAMESTATE_CREDITS
 	Button_Credits_MainMenu = new Button(550, 550, 100, 30, "Menu", ctx, false, "#000000");
-
-
-
-
 
 
 	imageMap = new Array(map.length);
