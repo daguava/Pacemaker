@@ -1,1 +1,0 @@
-Open pacemaker.html in chrome to start the game
