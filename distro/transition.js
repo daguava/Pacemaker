@@ -6,8 +6,6 @@ function myFunction(p1, p2) {
 }
 */
 
-
-
 function Transition(){
 this.alpha = 0;
 this.state = "resting";

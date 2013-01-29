@@ -6,12 +6,9 @@ function page_load() {
 	else if (document.addEventListener) //WC3 browsers
 		document.addEventListener(mousewheelevt, function(e) {mouse_scroll(e)}, false);
 	
-
 	canvas = document.getElementById("draw_canvas");
 	ctx = canvas.getContext("2d");
-
 	begin_game();	// Begin the game
-
 }
 
 function mouse_scroll(event) {
@@ -23,18 +20,16 @@ function mouse_scroll(event) {
 function mouse_move(event) {
 	Controller.mouse_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("draw_canvas").offsetLeft;
 	Controller.mouse_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("draw_canvas").offsetTop;
-	
 	// x and y now hold the position onscreen of the mouse after the mouse was moved
 }
 
 function mouse_press(event) {
 	Controller.click_mouse_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("draw_canvas").offsetLeft;
 	Controller.click_mouse_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("draw_canvas").offsetTop;
-	
 	// x and y now hold the position onscreen of the mouse click
 }
 
-	////////////////////////////////////////////////////////////////////////////////////////// KEY PRESSED DOWN
+//KEY PRESSED DOWN
 function key_event(event) {
 	//console.log(event.keyCode)
 	if(!ControllerUse){

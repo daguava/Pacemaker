@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <head>
-
-
 <link rel = "stylesheet" href = "style.css"> </link>
 
-<script type = "text/javascript" src = "./TweenLite.min.js"> </script>
+<!--Libraries!-->
+<script type = "text/javascript" src="./lib/gamepad.js"></script>
+<script type = "text/javascript" src="./lib/buzz.js"></script>
+<script type = "text/javascript" src = "./lib/TweenLite.min.js"> </script>
+<!--Sanic Studios Code !-->
 <script type = "text/javascript" src="./pacemaker_map.js"></script>
 <script type = "text/javascript" src="./game.js"></script>
 <script type = "text/javascript" src="./world_objects.js"></script>
-<script type = "text/javascript" src="./buzz.js"></script>
-<script type = "text/javascript" src="./gamepad.js"></script>
 <script type = "text/javascript" src="./events.js"></script>
 <script type = "text/javascript" src="./button.js"></script>
 <script type = "text/javascript" src="./rendering.js"></script>
@@ -17,17 +17,6 @@
 <script type = "text/javascript" src="./setup.js"></script>
 
 <script type = "text/javascript">
-
-
-
-
-
-
-
-
-
-
-
 
 var fps = 60, now, lastUpdate = (new Date)*1 - 1, fpsControl = 1, x, y;
 
@@ -74,7 +63,8 @@ function onFocus(){
 function onBlur(){
 	windowActive = false;
 }
-		////////////////////////////////////////////////////////////////////////////////////////// DISTANCE BETWEEN TWO OBJECTS
+
+// DISTANCE BETWEEN TWO OBJECTS
 function distanceBetween(Object1, Object2){
 	// return the distance between the centers of two objects
 	return Math.sqrt(
@@ -83,14 +73,12 @@ function distanceBetween(Object1, Object2){
 			  );
 }
 
-
-
-	///////////////////////////////////////////////////////////////////// ACTIONS TO DO BEFORE DRAWING (good place to update shit)
+// ACTIONS TO DO BEFORE DRAWING (good place to update shit)
 function frame(){
 
 	if(document.activeElement.id == "draw_canvas" && windowActive){
-		///////////////////////////////////////////////////////////////////////////////////// UPDATE DAT CHAR
-		
+	// UPDATE DAT CHAR
+	
 		if (PlayerGame.state == GAMESTATE_GAMEPLAY) {
 			CurrPlayer.update();
 		}
@@ -123,8 +111,6 @@ function frame(){
 	fpsControl = 60/thisFrameFPS;
 	fpsWave = 60/thisFrameFPS;
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////// IGNORE THESE
 window.addEventListener('keydown',key_event,true);

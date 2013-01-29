@@ -14,7 +14,7 @@ function draw_game() {
 	ctx.drawImage(background2, Math.round(platform_x_movement*(0.8)%background.width), 0);
 	ctx.drawImage(background2, Math.round(platform_x_movement*(0.8)%background.width+background.width), 0);
 
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH INDIVIDUAL TILE WHERE IT GOES
+		//// DRAW EACH INDIVIDUAL TILE WHERE IT GOES
 		for(var i = 0; i < map.length; i++){
 			for(var k = 0; k*blocksize+platform_x_movement < 1400 && k<map[i].length; k++){
 				if(imageMap[i][k] != null && k*blocksize+platform_x_movement >= -100 && (k+1)*blocksize + platform_x_movement < 1300) 
@@ -22,7 +22,7 @@ function draw_game() {
 			}
 		}
 
-		////////////////////////////////////////////////////////////////////////////////////////// DRAW EACH COLLECTABLE
+		//DRAW EACH COLLECTABLE
 		for(var i = 0; i < collectable.length; i++){
 			// handle collectables
 			ctx.drawImage(Cell.image, collectable[i].x+Math.floor(platform_x_movement), Math.floor(collectable[i].y));
@@ -38,7 +38,6 @@ function draw_game() {
 
 // DRAW UI
 	drawUI(ctx);
-
 
 //DRAW SEXY GRID
 
@@ -62,27 +61,18 @@ function draw_game() {
 		}
 	}
 
-
-
 	//DRAW LEVEL COMPLETE SCREEN
 	if(levelcomplete){
 	  console.log("level complete!");
 	  ctx.drawImage(levelCompleteImg, 200, 100);
-
-
 	  playerData.levels[currentLevel].best = collectable_count;
 	  playerData.levels[currentLevel].beaten = true; 
 
 	  if(Controller.attack){
 	 	PlayerGame.state = GAMESTATE_LEVEL_SELECT;
 	  }
-
 	}
-
 	ctx.restore();
-
-
-
 }
 
 function screenClear(currentGame){ 
@@ -106,7 +96,6 @@ function drawObject(drawableObject, ctx){
 
 //UP DRAWN TO SCREEN
 function drawUI(context){
-
 
 	var canvas = document.getElementById("draw_canvas");
 	if(debug) {
@@ -133,7 +122,6 @@ function drawUI(context){
 	//context.font = '30px Calibri';
 	//context.fillText("Level: " + currentLevel + " Complete:" + levelcomplete,430,35);
 
-
 	if(document.activeElement.id != "draw_canvas" || !windowActive || Controller.p){ //Known Bug - can pause while jumped
 				context.fillStyle = "rgba(50,50,50,0.5)";
 				context.fillRect(527, 247, 145, 50);
@@ -156,7 +144,6 @@ function updateButtonText(){
 	else{
 		Button_Level_Select_Two.text =  "Locked (???)"
 	}
-
 
 
 	if(playerData.levels[1].beaten){
@@ -182,29 +169,21 @@ function updateButtonText(){
 function draw_world() {  
 
 	if (PlayerGame.state == GAMESTATE_GAMEPLAY){
-
-		soundLevel1.unmute(); //////////////////////Start making sound in the gameplay, added here because fuggit
-
+		//Start making sound in the gameplay, added here because fuggit
+		soundLevel1.unmute(); 
 		draw_game();
-	
+		
+		if(Button_Gameplay_Reset.update()){
+			loadGame();
+		}
 
-	if(Button_Gameplay_Reset.update()){
-		//screenClear();
-		//PlayerGame.state = GAMESTATE_RESETTING;
-		loadGame();
-		//resetGame();
-	}
-
-	if(Button_Gameplay_Options.update()){
-		//loadGame();
-		PlayerGame.state = GAMESTATE_OPTIONS;
-		//PlayerGame.changeState(GAMESTATE_GAMEPLAY,GAMESTATE_OPTIONS);
-	}
+		if(Button_Gameplay_Options.update()){
+			PlayerGame.state = GAMESTATE_OPTIONS;
+		}
 	}
 
 	else if(PlayerGame.state == GAMESTATE_OPTIONS){
 		ctx.drawImage(optionsScreen, 0, 0);
-		//Button_Options_Start.draw();
 
 		if(Button_Options_Start.update()){
 			PlayerGame.state = GAMESTATE_START;
@@ -214,23 +193,9 @@ function draw_world() {
 	else if(PlayerGame.state == GAMESTATE_START){
 		ctx.drawImage(startScreen, 0, 0);
 
-		//Button_Start_Options.draw();
-		//Button_Start_Credits.draw();
-		//Button_Start_Play.draw();
-		
-	soundLevel1.mute();
-	soundLevel2.mute();
-	soundLevel3.mute();
-	soundLevel4.mute();
-	soundLevelSanic.mute();
-
-
-
-
 		if(Button_Start_Play.update() || Controller.space){
-			//PlayerGame.state = GAMESTATE_GAMEPLAY;
+
 			PlayerGame.state = GAMESTATE_LEVEL_SELECT;
-			//loadGame();
 		}	
 		
 		if(Button_Start_Credits.update()){
@@ -240,233 +205,59 @@ function draw_world() {
 		if(Button_Start_Options.update()){
 			PlayerGame.state = GAMESTATE_OPTIONS;			
 		}	
+	}
 
-
-	}else if(PlayerGame.state == GAMESTATE_CREDITS){
+	else if(PlayerGame.state == GAMESTATE_CREDITS){
 
 		ctx.drawImage(creditScreen1, 0, 0);
 
-		LoadMitchell();
-		LoadJason();
-		LoadNick();
-		LoadAlex();
-		LoadJesse();
-	
 		//Permanently display text to the screen
 	    ctx.font           = 'bold 40px Calibri';
 		ctx.fillStyle      = "rgb(0, 0, 0)";
-		ctx.strokeStyle    = 'black';
-		ctx.lineWidth      = 10;
+
 		//Draw permanent names to Credit's canvas
-	    ctx.fillText(sMitchellL, 210, 300);
-		ctx.fillText(sAlexS,     600, 350);
-		ctx.fillText(sNickH,     210, 400);
-		ctx.fillText(sJasonA,    600, 450);
-		ctx.fillText(sJesseK,    210, 500);
+	    ctx.fillText("MITCHELL LUTZKE", 210, 300);
+		ctx.fillText("ALEX SOHAIL",     600, 350);
+		ctx.fillText("NICK HEINDL",     210, 400);
+		ctx.fillText("JASON'S GIRLFRIEND",    600, 450);
+		ctx.fillText("JESSE KRIZENESKY",    210, 500);
 
 		if(Button_Credits_MainMenu.update()){
 			PlayerGame.state = GAMESTATE_START;
 		}
 	}
+	
 	else if(PlayerGame.state == GAMESTATE_LEVEL_SELECT){
 		updateButtonText();
-			ctx.drawImage(levelSelectBgImg,0,0);
-			if(	Button_Level_Select_One.update()){
-				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				currentLevel = 0;
-				loadGame();
-			}
+		ctx.drawImage(levelSelectBgImg,0,0);
+		if(	Button_Level_Select_One.update()){
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			currentLevel = 0;
+			loadGame();
+		}
 
+		//for xbox	
+		if(Controller.space){		
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			loadGame();							
+		}	
 
+		if(	Button_Level_Select_Two.update()){
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			currentLevel = 1;
+			loadGame();
+		}
 
+		if(Button_Level_Select_Three.update()){
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			currentLevel = 2;
+			loadGame();
+		}
 
-			if(Controller.space){////////////Have this here because I want use ecksbawks
-									
-				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				loadGame();
-										
-			}	
-
-			if(	Button_Level_Select_Two.update()){
-				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				currentLevel = 1;
-				loadGame();
-			}
-
-			if(Button_Level_Select_Three.update()){
-				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				currentLevel = 2;
-				loadGame();
-			}
-
-			if(Button_Level_Select_Four.update()){
-				PlayerGame.state = GAMESTATE_GAMEPLAY;
-				currentLevel = 3;
-				loadGame();
-			}
-
-			
-	}
-	else if(PlayerGame.state == GAMESTATE_RESETTING){
-		//console.log("RESETTING");
-		PlayerGame.state = GAMESTATE_GAMEPLAY;
-		loadGame();
+		if(Button_Level_Select_Four.update()){
+			PlayerGame.state = GAMESTATE_GAMEPLAY;
+			currentLevel = 3;
+			loadGame();
+		}
 	}
 }
-
-function LoadMitchell(){
-	
-		var x = String.fromCharCode(iCounter);
-		//ctx.drawImage(creditNameNick,     50, 250, 200, 100);
-		if(bMitchellL == 0){
-		    //iStringPosition = sMitchellL.length;
-		    
-			if(iStringPositionMitchell < sMitchellL.length){
-				if(x == sMitchellL.charAt(iStringPositionMitchell)){
-					
-					
-					ctx.font = 'bold 40px Calibri';
-					ctx.fillStyle = "rgb(0, 0, 0)";
-				    ctx.strokeStyle = 'black';
-		            ctx.lineWidth   = 10;
-	                ctx.fillText(x, iXTextPositionMitchell, iYTextPositionMitchell);
-	                	               
-	                aMitchellL[iStringPositionMitchell] = x;         
-
-	                sBuildMitchell += x;
-	                
-	                iXTextPositionMitchell += 40;
-	                iCounter = 32;
-	                iStringPositionMitchell++;
-	                
-	                
-				}
-				//x is a literal character, 
-				else if(x != sMitchellL.charAt(iStringPositionMitchell)){
-					iCounter++;
-				}
-				
-
-			}
-			
-		}
-}
-
-function LoadJason(){
-	
-		if(bJasonA == 0){
-			
-		var x = String.fromCharCode(iCounter);
-
-			if(iStringPositionJason < sJasonA.length){
-				if(x == sJasonA.charAt(iStringPositionJason)){
-					
-					ctx.font = 'bold 40px Calibri';
-					ctx.fillStyle = "rgb(0, 0, 0)";
-				    ctx.strokeStyle = 'black';
-		            ctx.lineWidth   = 10;
-					ctx.fillText(x, iXTextPositionJason, iYTextPositionJason);
-					
-					aJasonA[iStringPositionJason] = x;
-					
-					sBuildJason += x;
-					
-					iXTextPositionJason +=40;
-					iCounter = 32;
-					iStringPositionJason++;	
-				}
-				else if(x != sJasonA.charAt(iStringPositionJason)){
-					iCounter++;
-				}
-			}
-		}
-}
-
-function LoadAlex(){		
-		if(bAlexS == 0){
-		    var x = String.fromCharCode(iCounter);
-
-			if(iStringPositionAlex < sAlexS.length){
-				if(x == sAlexS.charAt(iStringPositionAlex)){
-					
-					ctx.font = 'bold 40px Calibri';
-					ctx.fillStyle = "rgb(0, 0, 0)";
-				    ctx.strokeStyle = 'black';
-		            ctx.lineWidth   = 10;
-		            
-		            
-					ctx.fillText(x, iXTextPositionAlex, iYTextPositionAlex);
-					
-					aAlexS[iStringPositionAlex] = x;
-					
-					sBuildAlex += x;
-					
-					iXTextPositionAlex +=40;
-					iCounter = 32;
-					iStringPositionAlex++;	
-				}
-				else if(x != sAlexS.charAt(iStringPositionAlex)){
-					iCounter++;
-				}
-			}
-		}
-}
-
-
-function LoadNick(){		
-		if(bNickH == 0){
-			var x = String.fromCharCode(iCounter);
-			if(iStringPositionNick < sNickH.length){
-				//document.getElementById("debug_info").innerHTML += (iStringPositionNick + "fuck me<br/>");
-				if(x == sNickH.charAt(iStringPositionNick)){
-					
-					ctx.font        = 'bold 40px Calibri';
-					ctx.fillStyle   = "rgb(0, 0, 0)";
-				    ctx.strokeStyle = 'black';
-		            ctx.lineWidth   = 10;
-					
-					ctx.fillText(x, iXTextPositionNick, iYTextPositionNick);
-					
-					aNickH[iStringPositionNick] = x;
-					
-					sBuildNick += x;
-					
-					iXTextPositionNick +=40;
-					iCounter = 32;
-					iStringPositionNick++;	
-				}
-				else if(x != sNickH.charAt(iStringPositionNick)){
-					iCounter++;
-				}
-			}
-		}
-}
-
-function LoadJesse(){
-		if(bJesseK == 0){
-			var x = String.fromCharCode(iCounter);
-			if(iStringPositionJesse < sJesseK.length){
-				if(x == sJesseK.charAt(iStringPositionJesse)){
-					
-					ctx.font        = 'bold 40px Calibri';
-					ctx.fillStyle   = "rgb(0, 0, 0)";
-				    ctx.strokeStyle = 'black';
-		            ctx.lineWidth   = 10;
-					ctx.fillText(x, iXTextPositionJesse, iYTextPositionJesse);
-					
-					aJesseK[iStringPositionJesse] = x;
-					
-					sBuildJesse += x;
-					
-					iXTextPositionJesse +=40;
-					iCounter = 32;
-					iStringPositionJesse++;	
-				}
-				else if(x != sJesseK.charAt(iStringPositionJesse)){
-					iCounter++;
-				}
-			}
-		}				
-}	
-
-

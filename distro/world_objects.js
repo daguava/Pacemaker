@@ -1,5 +1,5 @@
 var playerData;
-
+var jumping_threshold = 1.2;
 
 function Item(x, y) {
 	this.x = x;
@@ -62,8 +62,7 @@ function PlayerData(){
 }
 
 function Player(x_pos, y_pos) {
-playerData = new PlayerData();
-
+	playerData = new PlayerData();
 	this.init = function(){
 	this.x = x_pos;
 	this.last_x = 0;
@@ -97,20 +96,9 @@ playerData = new PlayerData();
 
 	this.init();
 
-
-		soundLevel1.loop().play().mute();
-		soundLevel2.loop().play().mute();
-		soundLevel3.loop().play().mute();
-		soundLevel4.loop().play().mute();
-		soundLevelSanic.loop().play().mute();
-
-
-	////////////////////////////////////////////////////////////////////////////////////////// Player's update function
+	///Player's update function
 
 	function update(){
-
-
-
 		if(this.x-platform_x_movement >= EndOfMap){
 			levelcomplete = true;
 		}
@@ -118,7 +106,6 @@ playerData = new PlayerData();
 		if(this.x-platform_x_movement >= EndOfMap + 1000){
 			this.x =  EndOfMap + 1000 + platform_x_movement;
 		}
-
 
 		this.last_x = this.x;
 		this.y_dir = 0;
@@ -129,7 +116,7 @@ playerData = new PlayerData();
 			this.deathAnimToggle = true
 			//this.x_speed = 0;
 			//platform_update = 0;
-			// death animation
+			//death animation
 			grav_const = 1;
 			this.y_speed = 7;
 			this.y_dir = -1;
@@ -148,9 +135,7 @@ playerData = new PlayerData();
 		soundLevel3.loop().play().mute();
 		soundLevel4.loop().play().mute();
 		soundLevelSanic.loop().play().mute();
-
-
-			PlayerGame.resetGame();
+		PlayerGame.resetGame();
 		}
 
 		if(!this.dead && !Controller.p){
@@ -226,8 +211,6 @@ playerData = new PlayerData();
 				this.x_speed = 13;
 				this.x_dir = 1;
 			}
-			
-		
 		}
 		
 		// calc new y speed based on gravity and possible jump
@@ -301,7 +284,6 @@ playerData = new PlayerData();
 		if(!this.dead){
 			this.detect_collision_platform();
 		}
-		
 
 		// loop through each collectable item. If the dist between it and character is small, collect it
 		for(var i = 0; i<collectable.length; i++){
@@ -312,7 +294,6 @@ playerData = new PlayerData();
 				collectable.splice(i, 1);
 			}
 		}
-
 
 		if(collectable_count == 0){
 			soundLevel1.setVolume(20)
@@ -326,7 +307,6 @@ playerData = new PlayerData();
 		if(collectable_count == 6){
 		soundLevel1.setVolume(80)
 		}
-
 
 		if(collectable_count == 8){ ////// Hard code to 8 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel2.unmute();
@@ -342,7 +322,6 @@ playerData = new PlayerData();
 		soundLevel2.setVolume(80)
 		}
 
-
 		if(collectable_count == 16){ ////// Hard code to 16 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel3.unmute();
 				soundLevel3.setVolume(20)
@@ -356,8 +335,6 @@ playerData = new PlayerData();
 		if(collectable_count == 22){
 		soundLevel3.setVolume(80)
 		}
-
-
 
 		if(collectable_count == 24){ ////// Hard code to 24 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevel4.unmute();
@@ -373,7 +350,6 @@ playerData = new PlayerData();
 		soundLevel4.setVolume(80)
 		}
 
-
 		if(collectable_count == 32){ ////// Hard code to 32 because it should matter (FR goes fast enough) and #YOLOSWAG
 				soundLevelSanic.unmute();
 				soundLevelSanic.setVolume(20)
@@ -387,8 +363,6 @@ playerData = new PlayerData();
 		if(collectable_count == 38){
 		soundLevelSanic.setVolume(80)
 		}
-
-
 
 		for(var i = 0; i<punchwall.length; i++){
 			if(distanceBetween(this, punchwall[i]) < this.hit_width/2){
@@ -407,8 +381,6 @@ playerData = new PlayerData();
 			this.walk_switch = !this.walk_switch;
 			this.distance_since_sprite_change = 0;
 		}
-
-		var jumping_threshold = 1.2;
 
 		// change to facing right image if moving right, or not moving
 		if(this.x_dir == 1 || this.x_dir == 0){
@@ -521,12 +493,9 @@ playerData = new PlayerData();
 				this.x_speed = 0;
 				if(depthX < 0){
 					this.x_correct_this_frame = true;
-					console.log("Happened");
-					
 				}
 				if(!this.x_correct_this_frame && this.x_correct_count > 1){
 					this.x_correct_count = 0;
-					console.log("Happened as well");
 				}
 			}
 		}

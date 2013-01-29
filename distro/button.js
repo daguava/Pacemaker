@@ -1,12 +1,11 @@
 
-/////////////////////////////////////////////////////////////////////////////////GODDAMN AWESOME AS SHIT BUTTONS (not really)
-function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColor) {
+//GODDAMN AWESOME AS SHIT BUTTONS (not really)
+function Button(x_pos, y_pos, b_width, b_height, b_text, b_hasBg,textColor) {
 	this.x = x_pos;
 	this.y = y_pos;
 	this.width = b_width;
 	this.height = b_height;
 	this.text = b_text;
-	this.ctx = b_ctx;
 	this.trueFill = textColor;
 	this.trueStroke = textColor;
 	this.currentFill = textColor;
@@ -21,25 +20,22 @@ function Button(x_pos, y_pos, b_width, b_height, b_text, b_ctx, b_hasBg,textColo
 
 	this.draw = function(){
 		if (!this.isTrans) { // Used to make actual buttons invisible because text is an image
-		this.ctx.fillStyle = this.currentFill / 10;
+		ctx.fillStyle = this.currentFill / 10;
 
-		//var textX = this.x ;//+ this.width/2 - textWidth/2;
-		
 		if(this.b_hasBg){
 			if(this.hovered){
-		this.ctx.fillStyle = this.bgColor;
+		ctx.fillStyle = this.bgColor;
 		}
 		else{
-		this.ctx.fillStyle = this.bgColor_Hovered;
+		ctx.fillStyle = this.bgColor_Hovered;
 	}
-    	this.ctx.fillRect(this.x, this.y, this.width, this.height);
+    	ctx.fillRect(this.x, this.y, this.width, this.height);
     	}
     	//this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-
-    	this.ctx.strokeStyle = this.currentStroke;
-    	this.ctx.font = '40px Calibri';
-    	this.ctx.fillStyle = this.currentFill;
-    	this.ctx.fillText(this.text, this.x + 25, this.y + this.height/2 + 10);
+    	ctx.strokeStyle = this.currentStroke;
+    	ctx.font = '40px Calibri';
+    	ctx.fillStyle = this.currentFill;
+    	ctx.fillText(this.text, this.x + 25, this.y + this.height/2 + 10);
    		}
 	}
 
