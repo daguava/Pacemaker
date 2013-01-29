@@ -33,3 +33,75 @@ function Game(ctx, x_boundary, y_boundary, frame_delay){
 
 	}
 }
+
+
+function collectCell(){
+	if(collectable_count == 0){
+		soundLevel1.setVolume(20)
+	}
+	if(collectable_count == 2){
+			soundLevel1.setVolume(40)
+	}
+	if(collectable_count == 4){
+			soundLevel1.setVolume(60)
+	}
+	if(collectable_count == 6){
+	soundLevel1.setVolume(80)
+	}
+
+	if(collectable_count == 8){ ////// Hard code to 8 because it should matter (FR goes fast enough) and #YOLOSWAG
+			soundLevel2.unmute();
+			soundLevel2.setVolume(20)
+	}
+	if(collectable_count == 10){
+			soundLevel2.setVolume(40)
+	}
+	if(collectable_count == 12){
+			soundLevel2.setVolume(60)
+	}
+	if(collectable_count == 14){
+	soundLevel2.setVolume(80)
+	}
+
+	if(collectable_count == 16){ ////// Hard code to 16 because it should matter (FR goes fast enough) and #YOLOSWAG
+			soundLevel3.unmute();
+			soundLevel3.setVolume(20)
+	}
+	if(collectable_count == 18){
+			soundLevel3.setVolume(40)
+	}
+	if(collectable_count == 20){
+			soundLevel3.setVolume(60)
+	}
+	if(collectable_count == 22){
+	soundLevel3.setVolume(80)
+	}
+
+	if(collectable_count == 24){ ////// Hard code to 24 because it should matter (FR goes fast enough) and #YOLOSWAG
+			soundLevel4.unmute();
+			soundLevel4.setVolume(20)
+	}
+	if(collectable_count == 26){
+			soundLevel4.setVolume(40)
+	}
+	if(collectable_count == 28){
+			soundLevel4.setVolume(60)
+	}
+	if(collectable_count == 30){
+	soundLevel4.setVolume(80)
+	}
+
+	if(collectable_count == 32){ ////// Hard code to 32 because it should matter (FR goes fast enough) and #YOLOSWAG
+		soundLevelSanic.unmute();
+		soundLevelSanic.setVolume(20)
+	}
+	if(collectable_count == 34){
+			soundLevelSanic.setVolume(40)
+	}
+	if(collectable_count == 36){
+			soundLevelSanic.setVolume(60)
+	}
+	if(collectable_count == 38){
+	soundLevelSanic.setVolume(80)
+	}
+}
