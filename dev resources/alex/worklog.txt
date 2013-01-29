@@ -1,0 +1,3 @@
+tons of cleanup / reorg
+added m button mute
+made game automatically restart a few seconds after death

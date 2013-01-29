@@ -65,8 +65,8 @@ function draw_game() {
 	if(levelcomplete){
 	  console.log("level complete!");
 	  ctx.drawImage(levelCompleteImg, 200, 100);
-	  playerData.levels[currentLevel].best = collectable_count;
-	  playerData.levels[currentLevel].beaten = true; 
+	  playerData.levels[playerData.currentLevel].best = collectable_count;
+	  playerData.levels[playerData.currentLevel].beaten = true; 
 
 	  if(Controller.attack){
 	 	PlayerGame.state = GAMESTATE_LEVEL_SELECT;
@@ -75,10 +75,9 @@ function draw_game() {
 	ctx.restore();
 }
 
-function screenClear(currentGame){ 
-	ctx.fillStyle = currentGame.clearColor;
-	ctx.fillRect(0, 0, currentGame.x_boundary, currentGame.y_boundary);
-	return true;
+function screenClear(){ 
+	ctx.fillStyle = PlayerGame.clearColor;
+	ctx.fillRect(0, 0,PlayerGame.x_boundary, PlayerGame.y_boundary);
 }
 
 //AVOID THIS SHIT
@@ -89,15 +88,12 @@ function drawObject(drawableObject, ctx){
 	ctx.rotate(drawableObject.rotation);
 	ctx.drawImage(drawableObject.image, -drawableObject.width/2, -drawableObject.height/2, drawableObject.width, drawableObject.height);
 	ctx.restore();	
-	return true;
 }
 
 
 
 //UP DRAWN TO SCREEN
 function drawUI(context){
-
-	var canvas = document.getElementById("draw_canvas");
 	if(debug) {
 		// draw debugging UI
 		context.font = '15px Calibri';
@@ -167,12 +163,9 @@ function updateButtonText(){
 
 //DRAW EVERYTHING
 function draw_world() {  
-
+	screenClear();
 	if (PlayerGame.state == GAMESTATE_GAMEPLAY){
-		//Start making sound in the gameplay, added here because fuggit
-		soundLevel1.unmute(); 
 		draw_game();
-		
 		if(Button_Gameplay_Reset.update()){
 			loadGame();
 		}
@@ -232,7 +225,7 @@ function draw_world() {
 		ctx.drawImage(levelSelectBgImg,0,0);
 		if(	Button_Level_Select_One.update()){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;
-			currentLevel = 0;
+			playerData.currentLevel = 0;
 			loadGame();
 		}
 
@@ -244,19 +237,19 @@ function draw_world() {
 
 		if(	Button_Level_Select_Two.update()){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;
-			currentLevel = 1;
+			playerData.currentLevel = 1;
 			loadGame();
 		}
 
 		if(Button_Level_Select_Three.update()){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;
-			currentLevel = 2;
+			playerData.currentLevel = 2;
 			loadGame();
 		}
 
 		if(Button_Level_Select_Four.update()){
 			PlayerGame.state = GAMESTATE_GAMEPLAY;
-			currentLevel = 3;
+			playerData.currentLevel = 3;
 			loadGame();
 		}
 	}

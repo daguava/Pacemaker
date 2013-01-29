@@ -30,6 +30,13 @@ function Platform(x, y, type) {
 	this.height = blocksize;
 }
 
+//UPDATE PLATFORM X POS (makes screen movement work)
+function update_platforms(x_change){
+	for(i = 0; i<platforms.length; i++){
+		platforms[i].x += x_change;
+	}
+}
+
 function LevelData(){
 	this.completed = false;
 	this.unlocked = true;
@@ -38,6 +45,7 @@ function LevelData(){
 }
 
 function PlayerData(){
+	this.currentLevel = 0;
 	this.levels = new Array();
 
 	var lvl1 = new LevelData();
@@ -62,7 +70,7 @@ function PlayerData(){
 }
 
 function Player(x_pos, y_pos) {
-	playerData = new PlayerData();
+	
 	this.init = function(){
 	this.x = x_pos;
 	this.last_x = 0;
@@ -84,6 +92,7 @@ function Player(x_pos, y_pos) {
 	this.grounded_last_frame = false;
 	this.jump_hold_toggle = false;
 	this.dead = false;
+	this.deadTime = 0;
 	this.walk_switch = false;
 	this.rotation  = 0;
 	this.attacking = false;
@@ -130,12 +139,7 @@ function Player(x_pos, y_pos) {
 
 		// if r is pressed, reset
 		if(Controller.r){
-		soundLevel1.loop().play().mute();
-		soundLevel2.loop().play().mute();
-		soundLevel3.loop().play().mute();
-		soundLevel4.loop().play().mute();
-		soundLevelSanic.loop().play().mute();
-		PlayerGame.resetGame();
+		loadGame();
 		}
 
 		if(!this.dead && !Controller.p){
@@ -284,13 +288,18 @@ function Player(x_pos, y_pos) {
 		if(!this.dead){
 			this.detect_collision_platform();
 		}
+		else{
+			this.deadTime++;
+			if(this.deadTime == 40){
+				loadGame();
+			}
+		}
 
 		// loop through each collectable item. If the dist between it and character is small, collect it
 		for(var i = 0; i<collectable.length; i++){
 			if(distanceBetween(this, collectable[i]) < this.hit_width/2){
 				collectable[i].hidden = true;
-				collectable_count++;
-
+				collectCell();
 				collectable.splice(i, 1);
 			}
 		}		
@@ -356,86 +365,89 @@ function Player(x_pos, y_pos) {
 				this.image = char_attack_top;
 			}
 		}
+		if(this.dead){
+			this.image = char_hurt;
+		}
 	}
 
 	//COLLISION WITH PLATFORMS
-	function detect_collision_platform(){
-		this.grounded_last_frame = this.grounded;
-		this.grounded = false;
+function detect_collision_platform(){
+	this.grounded_last_frame = this.grounded;
+	this.grounded = false;
 
-		var centerPlayerX = 0;
-		var centerPlayerY = 0;
-		var centerRectX = 0;
-		var centerRectY = 0;
-		var distanceX = 0;
-		var distanceY = 0;
-		var minDistanceX = 0;
-		var minDistanceY = 0;
-		var depthX = 0;
-		var depthY = 0;
+	var centerPlayerX = 0;
+	var centerPlayerY = 0;
+	var centerRectX = 0;
+	var centerRectY = 0;
+	var distanceX = 0;
+	var distanceY = 0;
+	var minDistanceX = 0;
+	var minDistanceY = 0;
+	var depthX = 0;
+	var depthY = 0;
 
-		this.x_correct_this_frame = false;
+	this.x_correct_this_frame = false;
 
-		for(var i = 0; i<platforms.length; i++){
+	for(var i = 0; i<platforms.length; i++){
 
-			centerPlayerX = this.x + this.hit_width/2+10;
-			if(grav_const == 1){
-				centerPlayerY = this.y + this.hit_height/2;
-			} else {
-				centerPlayerY = this.y + this.hit_height/2;
+		centerPlayerX = this.x + this.hit_width/2+10;
+		if(grav_const == 1){
+			centerPlayerY = this.y + this.hit_height/2;
+		} else {
+			centerPlayerY = this.y + this.hit_height/2;
+		}
+		
+		centerRectX = platforms[i].x + platforms[i].width/2;
+		centerRectY = platforms[i].y + platforms[i].height/2;
+
+		distanceX = centerPlayerX - centerRectX;
+		distanceY = centerPlayerY - centerRectY;
+		minDistanceX = this.hit_width/2 + platforms[i].width/2;
+		minDistanceY = this.hit_height/2 + platforms[i].height/2;
+
+		if(Math.abs(distanceX) >= minDistanceX || Math.abs(distanceY) >= minDistanceY){
+			depthX = 0;
+			depthY = 0;
+		} else {
+			depthX = distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
+			depthY = distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
+			if(platforms[i].type == 2){
+				this.dead = true;
 			}
-			
-			centerRectX = platforms[i].x + platforms[i].width/2;
-			centerRectY = platforms[i].y + platforms[i].height/2;
+		}
 
-			distanceX = centerPlayerX - centerRectX;
-			distanceY = centerPlayerY - centerRectY;
-			minDistanceX = this.hit_width/2 + platforms[i].width/2;
-			minDistanceY = this.hit_height/2 + platforms[i].height/2;
-
-			if(Math.abs(distanceX) >= minDistanceX || Math.abs(distanceY) >= minDistanceY){
-				depthX = 0;
-				depthY = 0;
+		if(Math.abs(depthY) < Math.abs(depthX)){ // resolve y first if true
+			this.y += depthY;
+			if(depthY<0){
+				this.airtime = 0;
+				this.y_speed = 0;
+				this.grounded = true;
 			} else {
-				depthX = distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
-				depthY = distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
-				if(platforms[i].type == 2){
-					this.dead = true;
-				}
-			}
-
-			if(Math.abs(depthY) < Math.abs(depthX)){ // resolve y first if true
-				this.y += depthY;
-				if(depthY<0){
+				if(grav_const == 1){
+					this.airtime = 4.5;
+				} else {
 					this.airtime = 0;
 					this.y_speed = 0;
 					this.grounded = true;
-				} else {
-					if(grav_const == 1){
-						this.airtime = 4.5;
-					} else {
-						this.airtime = 0;
-						this.y_speed = 0;
-						this.grounded = true;
-					}
-				}
-			} else { // resolve x first if the first statement was false
-				this.x += depthX;
-				this.x_speed = 0;
-				if(depthX < 0){
-					this.x_correct_this_frame = true;
-				}
-				if(!this.x_correct_this_frame && this.x_correct_count > 1){
-					this.x_correct_count = 0;
 				}
 			}
-		}
-
-		if(this.x_correct_this_frame){
-			this.x_correct_count++;
-		}
-		if(this.x_correct_count > 1){
-			this.dead = true;
+		} else { // resolve x first if the first statement was false
+			this.x += depthX;
+			this.x_speed = 0;
+			if(depthX < 0){
+				this.x_correct_this_frame = true;
+			}
+			if(!this.x_correct_this_frame && this.x_correct_count > 1){
+				this.x_correct_count = 0;
+			}
 		}
 	}
+
+	if(this.x_correct_this_frame){
+		this.x_correct_count++;
+	}
+	if(this.x_correct_count > 1){
+		this.dead = true;
+	}
+}
 }

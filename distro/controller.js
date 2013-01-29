@@ -38,7 +38,7 @@ gamepad.bind(Gamepad.Event.TICK, function(gamepads) {
     // gamepads were updated (around 60 times a second)
 	for (control in gamepads[0].state) {
 		//value = gamepads[i].state[control];
-		
+
 		if(gamepads[0].state['A']){
 			ControllerUse = true;
 			Controller.space = true;

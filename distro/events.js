@@ -7,6 +7,7 @@ function page_load() {
 		document.addEventListener(mousewheelevt, function(e) {mouse_scroll(e)}, false);
 	
 	canvas = document.getElementById("draw_canvas");
+	canvas.focus();
 	ctx = canvas.getContext("2d");
 	begin_game();	// Begin the game
 }
@@ -48,6 +49,7 @@ function key_event(event) {
 			case 68: 				Controller.attack = true; 		break;		// z - attack
 
 			case 13: 				Controller.enter = true;		break;
+			case 77: 				buzz.all().pause();					break;
 		}
 	}
 }
@@ -62,12 +64,12 @@ function key_event_up(event) {
 			case 38: case 87:		Controller.up = false; 		break;		// up
 			case 40: case 83:		Controller.down = false;	break;		// down
 
-			case 69: 				Controller.e = false;			break;
-			case 82:     			Controller.r = false;			break;
+			case 69: 				Controller.e = false;		break;
+			case 82:     			Controller.r = false;		break;
 
-			case 68: 				Controller.attack = false; 	 break;		// z - attack
+			case 68: 				Controller.attack = false; 	break;		// z - attack
 
-			case 13:                Controller.enter = false; 
+			case 13:                Controller.enter = false; 	break;
 		}
 	}
 }

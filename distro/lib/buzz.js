@@ -790,6 +790,18 @@ var buzz = {
         }
     },
 
+    muteAll : function(){
+        for (var i in buzz.sounds){
+            buzz.sounds[i].mute();
+        }
+    },
+
+    unMuteAll : function(){
+        for (var i in buzz.sounds){
+            buzz.sounds[i].unMute();
+        }
+    },
+    
     all: function() {
       return new buzz.group( buzz.sounds );
     },
